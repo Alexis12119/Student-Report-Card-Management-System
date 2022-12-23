@@ -7,9 +7,8 @@ using namespace std;
 
 class Project {
     struct student {
-        char name[80], id[10];
-        int understanding_the_self, filipino, philippine_history, programming, physical_education,
-            living_in_IT_Era, intro_to_computing, roll, sum, average;
+        char name[80], id_number[10];
+        int ge101, fil101, ge102, cc112, pe1, lite, cc111, nstp1, roll, sum, average;
     };
 
    public:
@@ -110,26 +109,27 @@ class Project {
             cin.ignore();
             cin.getline(s.name, 80);
             cout << "ENTER YOUR STUDENT ID NUMBER: ";
-            cin.get(s.id, 10);
+            cin.get(s.id_number, 10);
             cout << "ENTER YOUR ROLL NUMBER: ";
             cin >> s.roll;
-            cout << "ENTER YOUR COMPUTER PROGRAMMING MARK: ";
-            cin >> s.programming;
-            cout << "ENTER YOUR UNDERSTANDING THE SELF MARK: ";
-            cin >> s.understanding_the_self;
-            cout << "ENTER YOUR FILIPINO MARK: ";
-            cin >> s.filipino;
-            cout << "ENTER YOUR PHILIPPINE HISTORY MARK: ";
-            cin >> s.philippine_history;
-            cout << "ENTER YOUR PHYSICAL EDUCATION MARK: ";
-            cin >> s.physical_education;
-            cout << "ENTER YOUR LIVING IN IT ERA MARK: ";
-            cin >> s.living_in_IT_Era;
-            cout << "ENTER YOUR INTRO TO COMPUTING MARK: ";
-            cin >> s.intro_to_computing;
-            s.sum = s.programming + s.physical_education + s.living_in_IT_Era + s.intro_to_computing
-                    + s.philippine_history + s.filipino + s.understanding_the_self;
-            s.average = (s.sum / 7);
+            cout << "ENTER YOUR CC112 GRADE: ";
+            cin >> s.cc112;
+            cout << "ENTER YOUR GE101 GRADE: ";
+            cin >> s.ge101;
+            cout << "ENTER YOUR FIL101 GRADE: ";
+            cin >> s.fil101;
+            cout << "ENTER YOUR GE102 GRADE: ";
+            cin >> s.ge102;
+            cout << "ENTER YOUR PE1 GRADE: ";
+            cin >> s.pe1;
+            cout << "ENTER YOUR LITE GRADE: ";
+            cin >> s.lite;
+            cout << "ENTER YOUR CC111 GRADE: ";
+            cin >> s.cc111;
+            cout << "ENTER YOUR NSTP1 GRADE: ";
+            cin >> s.nstp1;
+            s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101 + s.nstp1;
+            s.average = (s.sum / 8);
             output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
             output_file.close();
             cout << "\n\t\t\t\tTHE FILE IS SUCCESSFULLY SAVED\n\n";
@@ -152,18 +152,18 @@ class Project {
         cout << "\t\t\t\t========== VIEW A SINGLE STUDENT REPORT ==========\n\n";
         while (infile.read(reinterpret_cast<char *>(&s), sizeof(student))) {
             if (s.roll == number) {
-                cout << "\t\t\t\t==================================================\n";
+                cout << "\t\t\t\t================================================\n";
                 cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
-                cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id << "\n\n";
+                cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
                 cout << "\t\t\t\tSTUDENT ROLL NUMBER: " << s.roll << "\n\n";
-                cout << "\t\t\t\tPROGRAMMING MARK: " << s.programming << "\n\n";
-                cout << "\t\t\t\tUNDERSTANDING THE SELF MARK: " << s.understanding_the_self
-                     << "\n\n";
-                cout << "\t\t\t\tFILIPINO MARK: " << s.filipino << "\n\n";
-                cout << "\t\t\t\tPHILIPPINE HISTORY MARK: " << s.philippine_history << "\n\n";
-                cout << "\t\t\t\tPHYSICAL EDUCATION MARK: " << s.physical_education << "\n\n";
-                cout << "\t\t\t\tLIVING IN IT ERA MARK: " << s.living_in_IT_Era << "\n\n";
-                cout << "\t\t\t\tINTRO TO COMPUTING MARK: " << s.intro_to_computing << "\n\n";
+                cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
+                cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
+                cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
+                cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
+                cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
+                cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
+                cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
+                cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
                 cout << "\t\t\t\tSUM: " << s.sum << "\n\n";
                 cout << "\t\t\t\tAVERAGE: " << s.average << "\n\n";
                 cout << "=================================================================="
@@ -195,16 +195,16 @@ class Project {
                     "==============\n";
             while (infile.read(reinterpret_cast<char *>(&s), sizeof(student))) {
                 cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
-                cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id << "\n\n";
+                cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
                 cout << "\t\t\t\tSTUDENT ROLL NUMBER: " << s.roll << "\n\n";
-                cout << "\t\t\t\tPROGRAMMING MARK: " << s.programming << "\n\n";
-                cout << "\t\t\t\tUNDERSTANDING THE SELF MARK: " << s.understanding_the_self
-                     << "\n\n";
-                cout << "\t\t\t\tFILIPINO MARK: " << s.filipino << "\n\n";
-                cout << "\t\t\t\tPHILIPPINE HISTORY MARK: " << s.philippine_history << "\n\n";
-                cout << "\t\t\t\tPHYSICAL EDUCATION MARK: " << s.physical_education << "\n\n";
-                cout << "\t\t\t\tLIVING IN IT ERA MARK: " << s.living_in_IT_Era << "\n\n";
-                cout << "\t\t\t\tINTRO TO COMPUTING MARK: " << s.intro_to_computing << "\n\n";
+                cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
+                cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
+                cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
+                cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
+                cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
+                cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
+                cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
+                cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
                 cout << "\t\t\t\tSUM: " << s.sum << "\n\n";
                 cout << "\t\t\t\tAVERAGE: " << s.average << "\n\n";
                 cout << "=================================================================="
@@ -243,8 +243,7 @@ class Project {
         output_file.close();
         remove("Data.txt");
         rename("Backup.txt", "Data.txt");
-        cout << '\n';
-        cout << "\t\t\t\tRECORD SUCCESSFULLY DELETED\n";
+        cout << "\n\t\t\t\tRECORD SUCCESSFULLY DELETED\n";
         cout << "Press Enter to continue...";
         cin.ignore();
         cin.get();
@@ -267,16 +266,16 @@ class Project {
                 if (s.roll == n) {
                     cout << "\t\t\t\t================================================\n";
                     cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
-                    cout << "\t\t\t\tSTUDENT ID NUMBER : " << s.id << "\n\n";
+                    cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
                     cout << "\t\t\t\tSTUDENT ROLL NUMBER: " << s.roll << "\n\n";
-                    cout << "\t\t\t\tPROGRAMMING MARK: " << s.programming << "\n\n";
-                    cout << "\t\t\t\tUNDERSTANDING THE SELF MARK: " << s.understanding_the_self
-                         << "\n\n";
-                    cout << "\t\t\t\tFILIPINO MARK: " << s.filipino << "\n\n";
-                    cout << "\t\t\t\tPHILIPPINE HISTORY MARK: " << s.philippine_history << "\n\n";
-                    cout << "\t\t\t\tPHYSICAL EDUCATION MARK: " << s.physical_education << "\n\n";
-                    cout << "\t\t\t\tLIVING IN IT ERA MARK: " << s.living_in_IT_Era << "\n\n";
-                    cout << "\t\t\t\tINTRO TO COMPUTING MARK: " << s.intro_to_computing << "\n\n";
+                    cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
+                    cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
+                    cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
+                    cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
+                    cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
+                    cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
+                    cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
+                    cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
                     cout << "=============================================\n";
                     cout << "\t\tENTER THE NEW INFORMATION\n";
                     cout << "=============================================\n";
@@ -284,28 +283,29 @@ class Project {
                     cin.ignore();
                     cin.getline(s.name, 80);
                     cout << "ENTER YOUR STUDENT ID NUMBER: ";
-                    cin.get(s.id, 10);
+                    cin.get(s.id_number, 10);
                     cout << "ENTER YOUR ROLL NUMBER: ";
                     cin >> s.roll;
-                    cout << "ENTER YOUR COMPUTER PROGRAMMING MARK: ";
-                    cin >> s.programming;
-                    cout << "ENTER YOUR UNDERSTANDING THE SELF MARK: ";
-                    cin >> s.understanding_the_self;
-                    cout << "ENTER YOUR FILIPINO MARK: ";
-                    cin >> s.filipino;
-                    cout << "ENTER YOUR PHILIPPINE HISTORY MARK: ";
-                    cin >> s.philippine_history;
-                    cout << "ENTER YOUR PHYSICAL EDUCATION MARK: ";
-                    cin >> s.physical_education;
-                    cout << "ENTER YOUR LIVING IN IT ERA MARK: ";
-                    cin >> s.living_in_IT_Era;
-                    cout << "ENTER YOUR INTRO TO COMPUTING MARK: ";
-                    cin >> s.intro_to_computing;
+                    cout << "ENTER YOUR CC112 GRADE: ";
+                    cin >> s.cc112;
+                    cout << "ENTER YOUR GE101 GRADE: ";
+                    cin >> s.ge101;
+                    cout << "ENTER YOUR FIL101 GRADE: ";
+                    cin >> s.fil101;
+                    cout << "ENTER YOUR GE102 GRADE: ";
+                    cin >> s.ge102;
+                    cout << "ENTER YOUR PE1 GRADE: ";
+                    cin >> s.pe1;
+                    cout << "ENTER YOUR LITE GRADE: ";
+                    cin >> s.lite;
+                    cout << "ENTER YOUR CC111 GRADE: ";
+                    cin >> s.cc111;
+                    cout << "ENTER YOUR NSTP1 GRADE: ";
+                    cin >> s.nstp1;
 
-                    s.sum = s.programming + s.physical_education + s.living_in_IT_Era
-                            + s.intro_to_computing + s.philippine_history + s.filipino
-                            + s.understanding_the_self;
-                    s.average = (s.sum / 7);
+                    s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101
+                            + s.nstp1;
+                    s.average = (s.sum / 8);
                     int pos = (-1) * static_cast<int>(sizeof(student));
                     input_file.seekp(pos, ios::cur);
                     input_file.write(reinterpret_cast<char *>(&s), sizeof(student));
