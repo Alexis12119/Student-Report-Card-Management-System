@@ -35,7 +35,7 @@ class Project {
         cin.ignore();
     }
     void main_menu() {
-        system("color c");
+        system("color 7");
         char choice;
         cout << "\t\t\t\t================= MAIN MENU ================\n\n\n";
         Sleep(300);
