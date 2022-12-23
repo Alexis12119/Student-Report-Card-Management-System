@@ -17,23 +17,19 @@ class Project {
     void intro() {
         cout << "\n\n\n";
         Sleep(300);
-        cout << "\t\t\t\t * * *  **** *      ****  ***   ***   ****   \n";
+        cout << "\t\t\t\t _  _  _ _______        _______  _____  _______ _______\n";
         Sleep(300);
-        cout << "\t\t\t\t * * * *     *     *     *   * * * * *        \n";
+        cout << "\t\t\t\t |  |  | |______ |      |       |     | |  |  | |______\n";
         Sleep(300);
-        cout << "\t\t\t\t * * * ***** *     *     *   * * * * *****    \n";
+        cout << "\t\t\t\t |__|__| |______ |_____ |_____  |_____| |  |  | |______\n";
         Sleep(300);
-        cout << "\t\t\t\t * * * *     *     *     *   * * * * *         \n";
-        Sleep(300);
-        cout << "\t\t\t\t  ***   **** *****  ****  ***  * * *  ****     \n";
-        Sleep(300);
-        cout << '\n';
-        cout << "\t\t\t\t=============================================\n";
+
+        cout << "\n\t\t\t\t=======================================================\n";
         Sleep(500);
-        cout << "\t\t\t\t    STUDENT REPORT CARD MANEGEMENT SYSTEM\n";
-        cout << "\t\t\t\t\t\tBY GROUP 3\n";
+        cout << "\t\t\t\t\tSTUDENT REPORT CARD MANEGEMENT SYSTEM\n";
+        cout << "\t\t\t\t\t\t      BY GROUP 3\n";
         Sleep(500);
-        cout << "\t\t\t\t=============================================\n\n\n";
+        cout << "\t\t\t\t=======================================================\n\n\n";
         Sleep(500);
         cout << "Press Enter to continue...";
         cin.ignore();
