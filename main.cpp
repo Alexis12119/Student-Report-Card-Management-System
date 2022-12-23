@@ -7,11 +7,9 @@ using namespace std;
 
 class Project {
     struct student {
-        char name[80];
-        char id[10];
-        int roll;
+        char name[80], id[10];
         int understanding_the_self, filipino, philippine_history, programming, physical_education,
-            living_in_IT_Era, intro_to_computing, sum, average;
+            living_in_IT_Era, intro_to_computing, roll, sum, average;
     };
 
    public:
@@ -112,7 +110,6 @@ class Project {
             cin.ignore();
             cin.getline(s.name, 80);
             cout << "ENTER YOUR STUDENT ID NUMBER: ";
-            cin.ignore();
             cin.get(s.id, 10);
             cout << "ENTER YOUR ROLL NUMBER: ";
             cin >> s.roll;
@@ -135,8 +132,7 @@ class Project {
             s.average = (s.sum / 7);
             output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
             output_file.close();
-            cout << '\n';
-            cout << "\t\t\t\tTHE FILE IS SUCCESSFULLY SAVED\n\n";
+            cout << "\n\t\t\t\tTHE FILE IS SUCCESSFULLY SAVED\n\n";
             cout << "Press Enter to continue...";
             cin.ignore();
             cin.get();
@@ -158,7 +154,7 @@ class Project {
             if (s.roll == number) {
                 cout << "\t\t\t\t==================================================\n";
                 cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
-                cout << "\t\t\t\tSTUDENT ID NUMBER : " << s.id << "\n\n";
+                cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id << "\n\n";
                 cout << "\t\t\t\tSTUDENT ROLL NUMBER: " << s.roll << "\n\n";
                 cout << "\t\t\t\tPROGRAMMING MARK: " << s.programming << "\n\n";
                 cout << "\t\t\t\tUNDERSTANDING THE SELF MARK: " << s.understanding_the_self
@@ -194,13 +190,12 @@ class Project {
             cin.ignore();
             cin.get();
         } else {
-            cout << "\n\n";
-            cout << "\t\t\t\tALL STUDENTS REPORT CARDS\n";
+            cout << "\n\n\t\t\t\tALL STUDENTS REPORT CARDS\n";
             cout << "===================================================================="
                     "==============\n";
             while (infile.read(reinterpret_cast<char *>(&s), sizeof(student))) {
                 cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
-                cout << "\t\t\t\tSTUDENT ID NUMBER : " << s.id << "\n\n";
+                cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id << "\n\n";
                 cout << "\t\t\t\tSTUDENT ROLL NUMBER: " << s.roll << "\n\n";
                 cout << "\t\t\t\tPROGRAMMING MARK: " << s.programming << "\n\n";
                 cout << "\t\t\t\tUNDERSTANDING THE SELF MARK: " << s.understanding_the_self
@@ -289,7 +284,6 @@ class Project {
                     cin.ignore();
                     cin.getline(s.name, 80);
                     cout << "ENTER YOUR STUDENT ID NUMBER: ";
-                    cin.ignore();
                     cin.get(s.id, 10);
                     cout << "ENTER YOUR ROLL NUMBER: ";
                     cin >> s.roll;
@@ -315,8 +309,7 @@ class Project {
                     int pos = (-1) * static_cast<int>(sizeof(student));
                     input_file.seekp(pos, ios::cur);
                     input_file.write(reinterpret_cast<char *>(&s), sizeof(student));
-                    cout << '\n';
-                    cout << "\t\t\t\tTHE FILE IS SUCCESSFULLY updated\n";
+                    cout << "\n\t\t\t\tTHE FILE IS SUCCESSFULLY UPDATED\n";
                     checker = true;
                 }
             }
@@ -324,8 +317,7 @@ class Project {
         input_file.close();
         if (checker == false)
             cout << "\t\t\t\tRECORD NOT FOUND\n";
-        cout << '\n';
-        cout << "Press Enter to continue...";
+        cout << "\nPress Enter to continue...";
         cin.ignore();
         cin.get();
     }
