@@ -375,7 +375,7 @@ class Project {
                 cout << "\t| San Luis, James Errol        |        BSIT-1E   |\n";
                 Sleep(300);
                 cout << "\t===================================================\n";
-                cout << "\n\nPress Enter to continue...";
+                cout << "\n\nPress Enter to exit...";
                 cin.ignore();
                 cin.get();
             }
