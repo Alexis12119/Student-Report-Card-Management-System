@@ -1,3 +1,6 @@
+/**
+TODO: Add Comments and Make user interface look good.
+  **/
 #include <windows.h>
 
 #include <fstream>
@@ -11,7 +14,6 @@ class Project {
         int ge101, fil101, ge102, cc112, pe1, lite, cc111, nstp1, roll, sum, average;
     };
 
-   public:
     void intro() {
         cout << "\n\n\n";
         Sleep(300);
@@ -132,7 +134,7 @@ class Project {
             s.average = (s.sum / 8);
             output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
             output_file.close();
-            cout << "\n\t\t\t\tTHE FILE IS SUCCESSFULLY SAVED\n\n";
+            cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
             cout << "Press Enter to continue...";
             cin.ignore();
             cin.get();
@@ -174,7 +176,7 @@ class Project {
         }
         infile.close();
         if (equality == false)
-            cout << "\t\t\t\tRECORD NOT FOUND...\n\n";
+            cout << "\t\t\t\tRECORD NOT FOUND :(\n\n";
         cout << "Press Enter to continue...";
         cin.ignore();
         cin.get();
@@ -214,7 +216,7 @@ class Project {
             }
             infile.close();
             if (check == false)
-                cout << "\t\t\t\tNO RECORD FOUND...\n\n";
+                cout << "\t\t\t\tNO RECORD FOUND :(\n\n";
             cout << "Press Enter to continue....";
             cin.ignore();
             cin.get();
@@ -243,12 +245,12 @@ class Project {
         output_file.close();
         remove("Data.txt");
         rename("Backup.txt", "Data.txt");
-        cout << "\n\t\t\t\tRECORD SUCCESSFULLY DELETED\n";
+        cout << "\n\t\t\t\tSUCCESSFULLY DELETED!!!\n";
         cout << "Press Enter to continue...";
         cin.ignore();
         cin.get();
     }
-    void modify_record(int n) {
+    void modify_record(int number) {
         system("cls");
         student s;
         fstream input_file;
@@ -263,7 +265,7 @@ class Project {
         while (!input_file.eof() && checker == false) {
             input_file.read(reinterpret_cast<char *>(&s), sizeof(student));
             {
-                if (s.roll == n) {
+                if (s.roll == number) {
                     cout << "\t\t\t\t================================================\n";
                     cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
                     cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
@@ -309,18 +311,20 @@ class Project {
                     int pos = (-1) * static_cast<int>(sizeof(student));
                     input_file.seekp(pos, ios::cur);
                     input_file.write(reinterpret_cast<char *>(&s), sizeof(student));
-                    cout << "\n\t\t\t\tTHE FILE IS SUCCESSFULLY UPDATED\n";
+                    cout << "\n\t\t\t\tSUCCESSFULLY UPDATED!!!\n";
                     checker = true;
                 }
             }
         }
         input_file.close();
         if (checker == false)
-            cout << "\t\t\t\tRECORD NOT FOUND\n";
+            cout << "\t\t\t\tRECORD NOT FOUND :(\n";
         cout << "\nPress Enter to continue...";
         cin.ignore();
         cin.get();
     }
+
+   public:
     void run() {
         system("color a");
         char choice;
