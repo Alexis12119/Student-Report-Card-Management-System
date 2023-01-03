@@ -11,7 +11,7 @@ using namespace std;
 class Project {
     struct student {
         char name[80], id_number[10];
-        int ge101, fil101, ge102, cc112, pe1, lite, cc111, nstp1, roll, sum, average;
+        int ge101, fil101, ge102, cc112, pe1, lite, cc111, nstp1, sum, average;
     };
 
     void intro() {
@@ -37,6 +37,7 @@ class Project {
     void main_menu() {
         system("color 7");
         char choice;
+        char id[10];
         cout << "\t\t\t\t================= MAIN MENU ================\n\n\n";
         Sleep(300);
         cout << "\t\t\t\t1. CREATE STUDENT REPORT CARD\n\n\n";
@@ -66,33 +67,30 @@ class Project {
         }
         case '3': {
             system("cls");
-            int number;
             cout << "ENTER YOUR ROLL NUMBER: ";
-            cin >> number;
-            view_specific_record(number);
+            cin >> id;
+            view_specific_record(id);
             break;
         }
         case '4': {
             system("cls");
-            int number;
             cout << "ENTER YOUR ROLL NUMBER: ";
-            cin >> number;
-            modify_record(number);
+            cin >> id;
+            modify_record(id);
             break;
         }
         case '5': {
             system("cls");
-            int number;
             cout << "ENTER YOUR ROLL NUMBER: ";
-            cin >> number;
+            cin >> id;
             cout << '\n';
-            delete_record(number);
+            delete_record(id);
             break;
         }
         }
     }
 
-    bool has_duplicate(int number) {
+    bool has_duplicate(char id[]) {
         student s;
         ifstream input_file;
         input_file.open("Data.txt", ios::app | ios::binary);
@@ -102,56 +100,12 @@ class Project {
             cin.get();
         }
         while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-            if (s.roll == number) {
+            if (s.id_number == id) {
                 return 1;
             }
         }
         input_file.close();
         return 0;
-    }
-
-    void ask_input() {
-        student s;
-        cout << "ENTER YOUR FULL NAME: ";
-        cin.ignore();
-        cin.getline(s.name, 80);
-        cout << "ENTER YOUR STUDENT ID NUMBER: ";
-        cin.get(s.id_number, 10);
-        cout << "ENTER YOUR ROLL NUMBER: ";
-        cin >> s.roll;
-        cout << "ENTER YOUR CC112 GRADE: ";
-        cin >> s.cc112;
-        cout << "ENTER YOUR GE101 GRADE: ";
-        cin >> s.ge101;
-        cout << "ENTER YOUR FIL101 GRADE: ";
-        cin >> s.fil101;
-        cout << "ENTER YOUR GE102 GRADE: ";
-        cin >> s.ge102;
-        cout << "ENTER YOUR PE1 GRADE: ";
-        cin >> s.pe1;
-        cout << "ENTER YOUR LITE GRADE: ";
-        cin >> s.lite;
-        cout << "ENTER YOUR CC111 GRADE: ";
-        cin >> s.cc111;
-        cout << "ENTER YOUR NSTP1 GRADE: ";
-        cin >> s.nstp1;
-    }
-
-    void show_info() {
-        student s;
-        cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
-        cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
-        cout << "\t\t\t\tSTUDENT ROLL NUMBER: " << s.roll << "\n\n";
-        cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
-        cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
-        cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
-        cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
-        cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
-        cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
-        cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
-        cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
-        cout << "\t\t\t\tSUM: " << s.sum << "\n\n";
-        cout << "\t\t\t\tAVERAGE: " << s.average << "\n\n";
     }
 
     void add_record() {
@@ -166,28 +120,48 @@ class Project {
         } else {
             cout << "\n\n";
             cout << "\t\t\t\t======= CREATE A REPORT CARD ========\n\n";
-            cout << "\tNOTE: When duplicate roll number detected, the system won't "
+            cout << "\tNOTE: When duplicate id number detected, the system won't "
                     "accept the informations\n";
             cout << "\tDon't worry, the system will ask you again, if it detects a "
                     "duplicate\n\n";
-            ask_input();
+            cout << "ENTER YOUR FULL NAME: ";
+            cin.ignore();
+            cin.getline(s.name, 80);
+            cout << "ENTER YOUR STUDENT ID NUMBER: ";
+            cin.get(s.id_number, 10);
+            cout << "ENTER YOUR CC112 GRADE: ";
+            cin >> s.cc112;
+            cout << "ENTER YOUR GE101 GRADE: ";
+            cin >> s.ge101;
+            cout << "ENTER YOUR FIL101 GRADE: ";
+            cin >> s.fil101;
+            cout << "ENTER YOUR GE102 GRADE: ";
+            cin >> s.ge102;
+            cout << "ENTER YOUR PE1 GRADE: ";
+            cin >> s.pe1;
+            cout << "ENTER YOUR LITE GRADE: ";
+            cin >> s.lite;
+            cout << "ENTER YOUR CC111 GRADE: ";
+            cin >> s.cc111;
+            cout << "ENTER YOUR NSTP1 GRADE: ";
+            cin >> s.nstp1;
+
             s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101 + s.nstp1;
             s.average = (s.sum / 8);
-            // if (has_duplicate(s.roll) == 0) {
-            //     output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
-            //     cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
-            // } else {
-            //     add_record();
-            // }
-            output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
-            cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
+            cout << has_duplicate(s.id_number) << '\n';
+            if (has_duplicate(s.id_number) == 0) {
+                output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
+                cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
+            } else {
+                add_record();
+            }
             cout << "Press Enter to continue...";
             output_file.close();
             cin.ignore();
             cin.get();
         }
     }
-    void view_specific_record(int number) {
+    void view_specific_record(char id[]) {
         system("cls");
         student s;
         ifstream input_file;
@@ -200,9 +174,21 @@ class Project {
         bool equality = false;
         cout << "\t\t\t\t========== VIEW A SINGLE STUDENT REPORT ==========\n\n";
         while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-            if (s.roll == number) {
+            if (s.id_number == id) {
                 cout << "\t\t\t\t================================================\n";
-                show_info();
+                cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
+                cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
+                cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
+                cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
+                cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
+                cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
+                cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
+                cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
+                cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
+                cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
+                cout << "\t\t\t\tSUM: " << s.sum << "\n\n";
+                cout << "\t\t\t\tAVERAGE: " << s.average << "\n\n";
+
                 cout << "=================================================================="
                         "================\n";
 
@@ -216,6 +202,7 @@ class Project {
         cin.ignore();
         cin.get();
     }
+
     void view_all_records() {
         system("cls");
         student s;
@@ -231,7 +218,19 @@ class Project {
             cout << "===================================================================="
                     "==============\n";
             while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-                show_info();
+                cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
+                cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
+                cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
+                cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
+                cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
+                cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
+                cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
+                cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
+                cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
+                cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
+                cout << "\t\t\t\tSUM: " << s.sum << "\n\n";
+                cout << "\t\t\t\tAVERAGE: " << s.average << "\n\n";
+
                 cout << "=================================================================="
                         "================\n";
 
@@ -245,7 +244,8 @@ class Project {
             cin.get();
         }
     }
-    void delete_record(int number) {
+
+    void delete_record(char id[]) {
         system("cls");
         student s;
         ifstream input_file;
@@ -260,7 +260,7 @@ class Project {
         input_file.seekg(0, ios::beg);
         cout << "\t\t\t\t=========== DELETE A REPORT CARD ==========\n\n";
         while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-            if (s.roll != number) {
+            if (s.id_number != id) {
                 output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
             }
         }
@@ -273,7 +273,8 @@ class Project {
         cin.ignore();
         cin.get();
     }
-    void modify_record(int number) {
+
+    void modify_record(char id[]) {
         system("cls");
         student s;
         fstream input_file;
@@ -288,13 +289,45 @@ class Project {
         while (!input_file.eof() && checker == false) {
             input_file.read(reinterpret_cast<char *>(&s), sizeof(student));
             {
-                if (s.roll == number) {
+                if (s.id_number == id) {
                     cout << "\t\t\t\t================================================\n";
-                    show_info();
+                    cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
+                    cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
+                    cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
+                    cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
+                    cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
+                    cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
+                    cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
+                    cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
+                    cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
+                    cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
+                    cout << "\t\t\t\tSUM: " << s.sum << "\n\n";
+                    cout << "\t\t\t\tAVERAGE: " << s.average << "\n\n";
                     cout << "=============================================\n";
                     cout << "\t\tENTER THE NEW INFORMATION\n";
                     cout << "=============================================\n";
-                    ask_input();
+                    cout << "ENTER YOUR FULL NAME: ";
+                    cin.ignore();
+                    cin.getline(s.name, 80);
+                    cout << "ENTER YOUR STUDENT ID NUMBER: ";
+                    cin.get(s.id_number, 10);
+                    cout << "ENTER YOUR CC112 GRADE: ";
+                    cin >> s.cc112;
+                    cout << "ENTER YOUR GE101 GRADE: ";
+                    cin >> s.ge101;
+                    cout << "ENTER YOUR FIL101 GRADE: ";
+                    cin >> s.fil101;
+                    cout << "ENTER YOUR GE102 GRADE: ";
+                    cin >> s.ge102;
+                    cout << "ENTER YOUR PE1 GRADE: ";
+                    cin >> s.pe1;
+                    cout << "ENTER YOUR LITE GRADE: ";
+                    cin >> s.lite;
+                    cout << "ENTER YOUR CC111 GRADE: ";
+                    cin >> s.cc111;
+                    cout << "ENTER YOUR NSTP1 GRADE: ";
+                    cin >> s.nstp1;
+
                     s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101
                             + s.nstp1;
                     s.average = (s.sum / 8);
