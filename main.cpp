@@ -19,25 +19,26 @@ class Project {
     void dashboard() {
         cout << "\n\n\n";
         Sleep(300);
-        cout << "\t\t\t\t _  _  _ _______        _______  _____  _______ _______\n";
+        cout << "\t\t_  _  _ _______        _______  _____  _______ _______\n";
         Sleep(300);
-        cout << "\t\t\t\t |  |  | |______ |      |       |     | |  |  | |______\n";
+        cout << "\t\t|  |  | |______ |      |       |     | |  |  | |______\n";
         Sleep(300);
-        cout << "\t\t\t\t |__|__| |______ |_____ |_____  |_____| |  |  | |______\n";
+        cout << "\t\t|__|__| |______ |_____ |_____  |_____| |  |  | |______\n";
         Sleep(300);
 
-        cout << "\n\t\t\t\t=======================================================\n";
+        cout << "\n\t\t=======================================================\n";
         Sleep(500);
-        cout << "\t\t\t\t\tSTUDENT REPORT CARD MANEGEMENT SYSTEM\n";
-        cout << "\t\t\t\t\t\t      BY GROUP 3\n";
+        cout << "\t\t\tSTUDENT REPORT CARD MANEGEMENT SYSTEM\n";
+        cout << "\t\t\t\t      BY GROUP 3\n";
         Sleep(500);
-        cout << "\t\t\t\t=======================================================\n\n\n";
+        cout << "\t\t=======================================================\n\n\n";
         Sleep(500);
         cout << "Press Enter to continue...";
         cin.ignore();
     }
 
     void main_menu() {
+        system("cls");
         system("color 7");
         string choice;
         char id[10];
@@ -86,6 +87,7 @@ class Project {
             intro();
 
         } else {
+            system("cls");
             main_menu();
         }
     }
@@ -372,7 +374,6 @@ class Project {
     }
 
     void intro() {
-        system("cls");
         string choice;
         system("cls");
         system("color e");
@@ -383,6 +384,7 @@ class Project {
         cout << "ENTER YOUR CHOICE: ";
         cin >> choice;
         if (choice == "2") {
+            system("cls");
             cout << "\t\t     THANK YOU FOR USING THIS SYSTEM\n";
             cout << "\n\n";
             cout << "\t______________________\n";
