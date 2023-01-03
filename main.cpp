@@ -110,6 +110,51 @@ class Project {
         return 0;
     }
 
+    void ask_input() {
+        system("cls");
+        student s;
+        cout << "ENTER YOUR FULL NAME: ";
+        cin.ignore();
+        cin.getline(s.name, 80);
+        cout << "ENTER YOUR STUDENT ID NUMBER: ";
+        cin.get(s.id_number, 10);
+        cout << "ENTER YOUR ROLL NUMBER: ";
+        cin >> s.roll;
+        cout << "ENTER YOUR CC112 GRADE: ";
+        cin >> s.cc112;
+        cout << "ENTER YOUR GE101 GRADE: ";
+        cin >> s.ge101;
+        cout << "ENTER YOUR FIL101 GRADE: ";
+        cin >> s.fil101;
+        cout << "ENTER YOUR GE102 GRADE: ";
+        cin >> s.ge102;
+        cout << "ENTER YOUR PE1 GRADE: ";
+        cin >> s.pe1;
+        cout << "ENTER YOUR LITE GRADE: ";
+        cin >> s.lite;
+        cout << "ENTER YOUR CC111 GRADE: ";
+        cin >> s.cc111;
+        cout << "ENTER YOUR NSTP1 GRADE: ";
+        cin >> s.nstp1;
+    }
+
+    void show_info() {
+        student s;
+        cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
+        cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
+        cout << "\t\t\t\tSTUDENT ROLL NUMBER: " << s.roll << "\n\n";
+        cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
+        cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
+        cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
+        cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
+        cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
+        cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
+        cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
+        cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
+        cout << "\t\t\t\tSUM: " << s.sum << "\n\n";
+        cout << "\t\t\t\tAVERAGE: " << s.average << "\n\n";
+    }
+
     void add_record() {
         system("cls");
         student s;
@@ -122,41 +167,21 @@ class Project {
         } else {
             cout << "\n\n";
             cout << "\t\t\t\t======= CREATE A REPORT CARD ========\n\n";
-            cout << "\n\t\t\t\t\tNOTE: When duplicate roll number detected, the system won't "
+            cout << "\tNOTE: When duplicate roll number detected, the system won't "
                     "accept the informations\n";
-            cout << "\n\t\t\t\t\tDon't worry, the system will ask you again, if it detects a "
-                    "duplicate\n";
-            cout << "ENTER YOUR FULL NAME: ";
-            cin.ignore();
-            cin.getline(s.name, 80);
-            cout << "ENTER YOUR STUDENT ID NUMBER: ";
-            cin.get(s.id_number, 10);
-            cout << "ENTER YOUR ROLL NUMBER: ";
-            cin >> s.roll;
-            cout << "ENTER YOUR CC112 GRADE: ";
-            cin >> s.cc112;
-            cout << "ENTER YOUR GE101 GRADE: ";
-            cin >> s.ge101;
-            cout << "ENTER YOUR FIL101 GRADE: ";
-            cin >> s.fil101;
-            cout << "ENTER YOUR GE102 GRADE: ";
-            cin >> s.ge102;
-            cout << "ENTER YOUR PE1 GRADE: ";
-            cin >> s.pe1;
-            cout << "ENTER YOUR LITE GRADE: ";
-            cin >> s.lite;
-            cout << "ENTER YOUR CC111 GRADE: ";
-            cin >> s.cc111;
-            cout << "ENTER YOUR NSTP1 GRADE: ";
-            cin >> s.nstp1;
+            cout << "\tDon't worry, the system will ask you again, if it detects a "
+                    "duplicate\n\n";
+            ask_input();
             s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101 + s.nstp1;
             s.average = (s.sum / 8);
-            if (has_duplicate(s.roll) == 0) {
-                output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
-                cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
-            } else {
-                add_record();
-            }
+            // if (has_duplicate(s.roll) == 0) {
+            //     output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
+            //     cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
+            // } else {
+            //     add_record();
+            // }
+            output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
+            cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
             cout << "Press Enter to continue...";
             output_file.close();
             cin.ignore();
@@ -178,19 +203,7 @@ class Project {
         while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
             if (s.roll == number) {
                 cout << "\t\t\t\t================================================\n";
-                cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
-                cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
-                cout << "\t\t\t\tSTUDENT ROLL NUMBER: " << s.roll << "\n\n";
-                cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
-                cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
-                cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
-                cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
-                cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
-                cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
-                cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
-                cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
-                cout << "\t\t\t\tSUM: " << s.sum << "\n\n";
-                cout << "\t\t\t\tAVERAGE: " << s.average << "\n\n";
+                show_info();
                 cout << "=================================================================="
                         "================\n";
 
@@ -219,19 +232,7 @@ class Project {
             cout << "===================================================================="
                     "==============\n";
             while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-                cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
-                cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
-                cout << "\t\t\t\tSTUDENT ROLL NUMBER: " << s.roll << "\n\n";
-                cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
-                cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
-                cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
-                cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
-                cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
-                cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
-                cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
-                cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
-                cout << "\t\t\t\tSUM: " << s.sum << "\n\n";
-                cout << "\t\t\t\tAVERAGE: " << s.average << "\n\n";
+                show_info();
                 cout << "=================================================================="
                         "================\n";
 
@@ -290,44 +291,11 @@ class Project {
             {
                 if (s.roll == number) {
                     cout << "\t\t\t\t================================================\n";
-                    cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
-                    cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
-                    cout << "\t\t\t\tSTUDENT ROLL NUMBER: " << s.roll << "\n\n";
-                    cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
-                    cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
-                    cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
-                    cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
-                    cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
-                    cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
-                    cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
-                    cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
+                    show_info();
                     cout << "=============================================\n";
                     cout << "\t\tENTER THE NEW INFORMATION\n";
                     cout << "=============================================\n";
-                    cout << "ENTER YOUR FULL NAME: ";
-                    cin.ignore();
-                    cin.getline(s.name, 80);
-                    cout << "ENTER YOUR STUDENT ID NUMBER: ";
-                    cin.get(s.id_number, 10);
-                    cout << "ENTER YOUR ROLL NUMBER: ";
-                    cin >> s.roll;
-                    cout << "ENTER YOUR CC112 GRADE: ";
-                    cin >> s.cc112;
-                    cout << "ENTER YOUR GE101 GRADE: ";
-                    cin >> s.ge101;
-                    cout << "ENTER YOUR FIL101 GRADE: ";
-                    cin >> s.fil101;
-                    cout << "ENTER YOUR GE102 GRADE: ";
-                    cin >> s.ge102;
-                    cout << "ENTER YOUR PE1 GRADE: ";
-                    cin >> s.pe1;
-                    cout << "ENTER YOUR LITE GRADE: ";
-                    cin >> s.lite;
-                    cout << "ENTER YOUR CC111 GRADE: ";
-                    cin >> s.cc111;
-                    cout << "ENTER YOUR NSTP1 GRADE: ";
-                    cin >> s.nstp1;
-
+                    ask_input();
                     s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101
                             + s.nstp1;
                     s.average = (s.sum / 8);
