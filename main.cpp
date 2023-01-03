@@ -150,6 +150,7 @@ class Project {
         cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
         cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
         cout << "\t\t\t\tSUM: " << s.sum << "\n\n";
+        cout << "\t\t\t\tAVERAGE: " << s.average << "\n\n";
     }
 
     void add_record() {
