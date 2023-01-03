@@ -19,19 +19,19 @@ class Project {
     void dashboard() {
         cout << "\n\n\n";
         Sleep(300);
-        cout << "\t\t_  _  _ _______        _______  _____  _______ _______\n";
+        cout << "\t\t\t_  _  _ _______        _______  _____  _______ _______\n";
         Sleep(300);
-        cout << "\t\t|  |  | |______ |      |       |     | |  |  | |______\n";
+        cout << "\t\t\t|  |  | |______ |      |       |     | |  |  | |______\n";
         Sleep(300);
-        cout << "\t\t|__|__| |______ |_____ |_____  |_____| |  |  | |______\n";
+        cout << "\t\t\t|__|__| |______ |_____ |_____  |_____| |  |  | |______\n";
         Sleep(300);
 
-        cout << "\n\t\t=======================================================\n";
+        cout << "\n\t\t\t=======================================================\n";
         Sleep(500);
-        cout << "\t\t\tSTUDENT REPORT CARD MANEGEMENT SYSTEM\n";
-        cout << "\t\t\t\t      BY GROUP 3\n";
+        cout << "\t\t\t\tSTUDENT REPORT CARD MANEGEMENT SYSTEM\n";
+        cout << "\t\t\t\t\t      BY GROUP 3\n";
         Sleep(500);
-        cout << "\t\t=======================================================\n\n\n";
+        cout << "\t\t\t=======================================================\n\n\n";
         Sleep(500);
         cout << "Press Enter to continue...";
         cin.ignore();
