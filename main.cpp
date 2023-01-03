@@ -76,6 +76,9 @@ class Project {
             main_menu();
 
         } else if (choice == "5") {
+            system("cls");
+            cout << "ENTER YOUR STUDENT ID NUMBER: ";
+            cin >> id;
             delete_record(id);
             main_menu();
 
