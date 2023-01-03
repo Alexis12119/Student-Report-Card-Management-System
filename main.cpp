@@ -110,6 +110,48 @@ class Project {
         return 0;
     }
 
+    void ask_input(struct student &s) {
+        cout << "\tNOTE: When duplicate id number detected, the system won't "
+                "accept the informations\n";
+        cout << "\tDon't worry, the system will ask you again, if it detects a "
+                "duplicate\n\n";
+        cout << "ENTER YOUR FULL NAME: ";
+        cin.ignore();
+        cin.getline(s.name, 80);
+        cout << "ENTER YOUR STUDENT ID NUMBER: ";
+        cin.get(s.id_number, 10);
+        cout << "ENTER YOUR CC112 GRADE: ";
+        cin >> s.cc112;
+        cout << "ENTER YOUR GE101 GRADE: ";
+        cin >> s.ge101;
+        cout << "ENTER YOUR FIL101 GRADE: ";
+        cin >> s.fil101;
+        cout << "ENTER YOUR GE102 GRADE: ";
+        cin >> s.ge102;
+        cout << "ENTER YOUR PE1 GRADE: ";
+        cin >> s.pe1;
+        cout << "ENTER YOUR LITE GRADE: ";
+        cin >> s.lite;
+        cout << "ENTER YOUR CC111 GRADE: ";
+        cin >> s.cc111;
+        cout << "ENTER YOUR NSTP1 GRADE: ";
+        cin >> s.nstp1;
+    }
+
+    void show_info(struct student &s) {
+        cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
+        cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
+        cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
+        cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
+        cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
+        cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
+        cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
+        cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
+        cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
+        cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
+        cout << "\t\t\t\tSUM: " << s.sum << "\n\n";
+    }
+
     void add_record() {
         system("cls");
         student s;
@@ -122,32 +164,7 @@ class Project {
         } else {
             cout << "\n\n";
             cout << "\t\t\t\t======= CREATE A REPORT CARD ========\n\n";
-            cout << "\tNOTE: When duplicate id number detected, the system won't "
-                    "accept the informations\n";
-            cout << "\tDon't worry, the system will ask you again, if it detects a "
-                    "duplicate\n\n";
-            cout << "ENTER YOUR FULL NAME: ";
-            cin.ignore();
-            cin.getline(s.name, 80);
-            cout << "ENTER YOUR STUDENT ID NUMBER: ";
-            cin.get(s.id_number, 10);
-            cout << "ENTER YOUR CC112 GRADE: ";
-            cin >> s.cc112;
-            cout << "ENTER YOUR GE101 GRADE: ";
-            cin >> s.ge101;
-            cout << "ENTER YOUR FIL101 GRADE: ";
-            cin >> s.fil101;
-            cout << "ENTER YOUR GE102 GRADE: ";
-            cin >> s.ge102;
-            cout << "ENTER YOUR PE1 GRADE: ";
-            cin >> s.pe1;
-            cout << "ENTER YOUR LITE GRADE: ";
-            cin >> s.lite;
-            cout << "ENTER YOUR CC111 GRADE: ";
-            cin >> s.cc111;
-            cout << "ENTER YOUR NSTP1 GRADE: ";
-            cin >> s.nstp1;
-
+            ask_input(s);
             s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101 + s.nstp1;
             s.average = (s.sum / 8);
             if (has_duplicate(s.id_number) == 0) {
@@ -161,47 +178,6 @@ class Project {
             cin.ignore();
             cin.get();
         }
-    }
-    void view_specific_record(char *id) {
-        system("cls");
-        student s;
-        ifstream input_file;
-        input_file.open("Data.txt", ios::app | ios::binary);
-        if (input_file.fail()) {
-            cout << "THE FILE COULD NOT BE OPENED...";
-            cin.ignore();
-            cin.get();
-        }
-        bool equality = false;
-        cout << "\t\t\t\t========== VIEW A SINGLE STUDENT REPORT ==========\n\n";
-        while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-            if (strcmp(s.id_number, id) == 0) {
-                cout << "\t\t\t\t================================================\n";
-                cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
-                cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
-                cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
-                cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
-                cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
-                cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
-                cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
-                cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
-                cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
-                cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
-                cout << "\t\t\t\tSUM: " << s.sum << "\n\n";
-                cout << "\t\t\t\tAVERAGE: " << s.average << "\n\n";
-
-                cout << "=================================================================="
-                        "================\n";
-
-                equality = true;
-            }
-        }
-        input_file.close();
-        if (equality == false)
-            cout << "\t\t\t\tRECORD NOT FOUND :(\n\n";
-        cout << "Press Enter to continue...";
-        cin.ignore();
-        cin.get();
     }
 
     void view_all_records() {
@@ -219,19 +195,7 @@ class Project {
             cout << "===================================================================="
                     "==============\n";
             while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-                cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
-                cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
-                cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
-                cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
-                cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
-                cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
-                cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
-                cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
-                cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
-                cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
-                cout << "\t\t\t\tSUM: " << s.sum << "\n\n";
-                cout << "\t\t\t\tAVERAGE: " << s.average << "\n\n";
-
+                show_info(s);
                 cout << "=================================================================="
                         "================\n";
 
@@ -244,6 +208,84 @@ class Project {
             cin.ignore();
             cin.get();
         }
+    }
+
+    void view_specific_record(char *id) {
+        system("cls");
+        student s;
+        ifstream input_file;
+        input_file.open("Data.txt", ios::app | ios::binary);
+        if (input_file.fail()) {
+            cout << "THE FILE COULD NOT BE OPENED...";
+            cin.ignore();
+            cin.get();
+        }
+        bool equality = false;
+        cout << "\t\t\t\t========== VIEW A SINGLE STUDENT REPORT ==========\n\n";
+        while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
+            if (strcmp(s.id_number, id) == 0) {
+                cout << "\t\t\t\t================================================\n";
+                show_info(s);
+                cout << "=================================================================="
+                        "================\n";
+
+                equality = true;
+            }
+        }
+        input_file.close();
+        if (equality == false)
+            cout << "\t\t\t\tRECORD NOT FOUND :(\n\n";
+        cout << "Press Enter to continue...";
+        cin.ignore();
+        cin.get();
+    }
+
+    void modify_record(char *id) {
+        system("cls");
+        student s;
+        fstream input_file;
+        input_file.open("Data.txt", ios::binary | ios::in | ios::out);
+        if (input_file.fail()) {
+            cout << "THE FILE COULD NOT BE OPENED...\n";
+            cin.ignore();
+            cin.get();
+        }
+        bool checker = false;
+        cout << "\t\t\t\t========== MODIFY A REPORT CARD ==========\n\n";
+        while (!input_file.eof() && checker == false) {
+            input_file.read(reinterpret_cast<char *>(&s), sizeof(student));
+            {
+                if (strcmp(s.id_number, id) == 0) {
+                    cout << "\t\t\t\t================================================\n";
+                    show_info(s);
+                    cout << "=============================================\n";
+                    cout << "\t\tENTER THE NEW INFORMATION\n";
+                    cout << "=============================================\n";
+                    ask_input(s);
+
+                    s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101
+                            + s.nstp1;
+                    s.average = (s.sum / 8);
+                    if (has_duplicate(s.id_number) == 0) {
+                        int pos = (-1) * static_cast<int>(sizeof(student));
+                        input_file.seekp(pos, ios::cur);
+                        input_file.write(reinterpret_cast<char *>(&s), sizeof(student));
+                        cout << "\n\t\t\t\tSUCCESSFULLY UPDATED!!!\n";
+                        cout << "\nPress Enter to continue...";
+                    } else {
+                        modify_record(s.id_number);
+                    }
+                    checker = true;
+                }
+            }
+        }
+        input_file.close();
+        if (checker == false) {
+            cout << "\t\t\t\tRECORD NOT FOUND :(\n";
+            cout << "\nPress Enter to continue...";
+        }
+        cin.ignore();
+        cin.get();
     }
 
     void delete_record(char *id) {
@@ -285,90 +327,6 @@ class Project {
             cout << "\t\t\t\tNO RECORD FOUND :(\n\n";
         }
         cout << "Press Enter to continue...";
-        cin.ignore();
-        cin.get();
-    }
-
-    void modify_record(char *id) {
-        system("cls");
-        student s;
-        fstream input_file;
-        input_file.open("Data.txt", ios::binary | ios::in | ios::out);
-        if (input_file.fail()) {
-            cout << "THE FILE COULD NOT BE OPENED...\n";
-            cin.ignore();
-            cin.get();
-        }
-        bool checker = false;
-        cout << "\t\t\t\t========== MODIFY A REPORT CARD ==========\n\n";
-        while (!input_file.eof() && checker == false) {
-            input_file.read(reinterpret_cast<char *>(&s), sizeof(student));
-            {
-                if (strcmp(s.id_number, id) == 0) {
-                    cout << "\t\t\t\t================================================\n";
-                    cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
-                    cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
-                    cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
-                    cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
-                    cout << "\t\t\t\tFIL101 GRADE: " << s.fil101 << "\n\n";
-                    cout << "\t\t\t\tGE102 GRADE: " << s.ge102 << "\n\n";
-                    cout << "\t\t\t\tPE1 GRADE: " << s.pe1 << "\n\n";
-                    cout << "\t\t\t\tLITE GRADE: " << s.lite << "\n\n";
-                    cout << "\t\t\t\tCC111 GRADE: " << s.cc111 << "\n\n";
-                    cout << "\t\t\t\tNSTP1 GRADE: " << s.nstp1 << "\n\n";
-                    cout << "\t\t\t\tSUM: " << s.sum << "\n\n";
-                    cout << "\t\t\t\tAVERAGE: " << s.average << "\n\n";
-                    cout << "=============================================\n";
-                    cout << "\t\tENTER THE NEW INFORMATION\n";
-                    cout << "=============================================\n";
-                    cout << "NOTE: When duplicate id number detected, the system won't "
-                            "accept the informations\n";
-                    cout << "Don't worry, the system will ask you again, if it detects a "
-                            "duplicate\n\n";
-
-                    cout << "ENTER YOUR FULL NAME: ";
-                    cin.ignore();
-                    cin.getline(s.name, 80);
-                    cout << "ENTER YOUR STUDENT ID NUMBER: ";
-                    cin.get(s.id_number, 10);
-                    cout << "ENTER YOUR CC112 GRADE: ";
-                    cin >> s.cc112;
-                    cout << "ENTER YOUR GE101 GRADE: ";
-                    cin >> s.ge101;
-                    cout << "ENTER YOUR FIL101 GRADE: ";
-                    cin >> s.fil101;
-                    cout << "ENTER YOUR GE102 GRADE: ";
-                    cin >> s.ge102;
-                    cout << "ENTER YOUR PE1 GRADE: ";
-                    cin >> s.pe1;
-                    cout << "ENTER YOUR LITE GRADE: ";
-                    cin >> s.lite;
-                    cout << "ENTER YOUR CC111 GRADE: ";
-                    cin >> s.cc111;
-                    cout << "ENTER YOUR NSTP1 GRADE: ";
-                    cin >> s.nstp1;
-
-                    s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101
-                            + s.nstp1;
-                    s.average = (s.sum / 8);
-                    if (has_duplicate(s.id_number) == 0) {
-                        int pos = (-1) * static_cast<int>(sizeof(student));
-                        input_file.seekp(pos, ios::cur);
-                        input_file.write(reinterpret_cast<char *>(&s), sizeof(student));
-                        cout << "\n\t\t\t\tSUCCESSFULLY UPDATED!!!\n";
-                        cout << "\nPress Enter to continue...";
-                    } else {
-                        modify_record(s.id_number);
-                    }
-                    checker = true;
-                }
-            }
-        }
-        input_file.close();
-        if (checker == false) {
-            cout << "\t\t\t\tRECORD NOT FOUND :(\n";
-            cout << "\nPress Enter to continue...";
-        }
         cin.ignore();
         cin.get();
     }
