@@ -111,7 +111,6 @@ class Project {
     }
 
     void ask_input() {
-        system("cls");
         student s;
         cout << "ENTER YOUR FULL NAME: ";
         cin.ignore();
