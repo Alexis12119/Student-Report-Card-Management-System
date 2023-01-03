@@ -12,7 +12,7 @@ using namespace std;
 
 class Project {
     struct student {
-        char name[80], id_number[10];
+        char name[INT_MAX], id_number[INT_MAX];
         int ge101, fil101, ge102, cc112, pe1, lite, cc111, nstp1, sum, average;
     };
 
@@ -41,7 +41,7 @@ class Project {
         system("cls");
         system("color 7");
         string choice;
-        char id[10];
+        char id[INT_MAX];
         cout << "\t\t\t\t================= MAIN MENU ================\n\n\n";
         cout << "\t\t\t\t1. CREATE STUDENT REPORT CARD\n\n\n";
         cout << "\t\t\t\t2. VIEW ALL STUDENTS REPORT CARD\n\n\n";
@@ -117,9 +117,9 @@ class Project {
                 "duplicate\n\n";
         cout << "ENTER YOUR FULL NAME: ";
         cin.ignore();
-        cin.getline(s.name, 80);
+        cin.getline(s.name, INT_MAX);
         cout << "ENTER YOUR STUDENT ID NUMBER: ";
-        cin.getline(s.id_number, 10);
+        cin.getline(s.id_number, INT_MAX);
         cout << "ENTER YOUR CC112 GRADE: ";
         cin >> s.cc112;
         cout << "ENTER YOUR GE101 GRADE: ";
