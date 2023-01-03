@@ -247,27 +247,41 @@ class Project {
     void delete_record(char *id) {
         system("cls");
         student s;
+        bool check = 0;
         ifstream input_file;
+        ofstream output_file;
         input_file.open("Data.txt", ios::binary);
         if (!input_file) {
             cout << "THE FILE COULD NOT BE OPENED...\n";
             cin.ignore();
             cin.get();
         }
-        ofstream output_file;
-        output_file.open("Backup.txt", ios::binary);
-        input_file.seekg(0, ios::beg);
-        cout << "\t\t\t\t=========== DELETE A REPORT CARD ==========\n\n";
+        // Check if there's any record
         while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-            if (strcmp(s.id_number, id) != 0) {
-                output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
+            if (strcmp(s.id_number, id) == 0) {
+                check = 1;
+                break;
             }
         }
-        input_file.close();
-        output_file.close();
-        remove("Data.txt");
-        rename("Backup.txt", "Data.txt");
-        cout << "\n\t\t\t\tSUCCESSFULLY DELETED!!!\n";
+        cout << "\t\t\t\t=========== DELETE A REPORT CARD ==========\n\n";
+        if (check) {
+            while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
+                if (strcmp(s.id_number, id) != 0) {
+                    output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
+                }
+            }
+            output_file.open("Backup.txt", ios::binary);
+            input_file.seekg(0, ios::beg);
+            input_file.close();
+            output_file.close();
+            remove("Data.txt");
+            rename("Backup.txt", "Data.txt");
+            cout << "\n\t\t\t\tSUCCESSFULLY DELETED!!!\n";
+        } else {
+            input_file.close();
+            output_file.close();
+            cout << "\t\t\t\tNO RECORD FOUND :(\n\n";
+        }
         cout << "Press Enter to continue...";
         cin.ignore();
         cin.get();
