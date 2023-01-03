@@ -90,7 +90,7 @@ class Project {
         }
     }
 
-    bool has_duplicate(char id[]) {
+    bool has_duplicate(char *id) {
         student s;
         ifstream input_file;
         input_file.open("Data.txt", ios::app | ios::binary);
@@ -161,7 +161,7 @@ class Project {
             cin.get();
         }
     }
-    void view_specific_record(char id[]) {
+    void view_specific_record(char *id) {
         system("cls");
         student s;
         ifstream input_file;
@@ -245,7 +245,7 @@ class Project {
         }
     }
 
-    void delete_record(char id[]) {
+    void delete_record(char *id) {
         system("cls");
         student s;
         ifstream input_file;
@@ -274,7 +274,7 @@ class Project {
         cin.get();
     }
 
-    void modify_record(char id[]) {
+    void modify_record(char *id) {
         system("cls");
         student s;
         fstream input_file;
