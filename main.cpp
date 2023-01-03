@@ -15,7 +15,7 @@ class Project {
         int ge101, fil101, ge102, cc112, pe1, lite, cc111, nstp1, sum, average;
     };
 
-    void intro() {
+    void dashboard() {
         cout << "\n\n\n";
         Sleep(300);
         cout << "\t\t\t\t _  _  _ _______        _______  _____  _______ _______\n";
@@ -35,9 +35,10 @@ class Project {
         cout << "Press Enter to continue...";
         cin.ignore();
     }
+
     void main_menu() {
         system("color 7");
-        char choice;
+        int choice;
         char id[10];
         cout << "\t\t\t\t================= MAIN MENU ================\n\n\n";
         cout << "\t\t\t\t1. CREATE STUDENT REPORT CARD\n\n\n";
@@ -48,38 +49,42 @@ class Project {
         cout << "\t\t\t\t=============================================\n";
         cout << "\t\t\t\tENTER YOUR CHOICE(1-5): ";
         cin >> choice;
-        cout << '\n';
-        switch (choice) {
-        case '1': {
-            add_record();
-            break;
-        }
-        case '2': {
-            view_all_records();
-            break;
-        }
-        case '3': {
-            system("cls");
-            cout << "ENTER YOUR STUDENT ID NUMBER: ";
-            cin >> id;
-            view_specific_record(id);
-            break;
-        }
-        case '4': {
-            system("cls");
-            cout << "ENTER YOUR STUDENT ID NUMBER: ";
-            cin >> id;
-            modify_record(id);
-            break;
-        }
-        case '5': {
-            system("cls");
-            cout << "ENTER YOUR STUDENT ID NUMBER: ";
-            cin >> id;
+        if (choice < 1 || choice > 5) {
+            main_menu();
+        } else {
             cout << '\n';
-            delete_record(id);
-            break;
-        }
+            switch (choice) {
+            case 1: {
+                add_record();
+                break;
+            }
+            case 2: {
+                view_all_records();
+                break;
+            }
+            case 3: {
+                system("cls");
+                cout << "ENTER YOUR STUDENT ID NUMBER: ";
+                cin >> id;
+                view_specific_record(id);
+                break;
+            }
+            case 4: {
+                system("cls");
+                cout << "ENTER YOUR STUDENT ID NUMBER: ";
+                cin >> id;
+                modify_record(id);
+                break;
+            }
+            case 5: {
+                system("cls");
+                cout << "ENTER YOUR STUDENT ID NUMBER: ";
+                cin >> id;
+                cout << '\n';
+                delete_record(id);
+                break;
+            }
+            }
         }
     }
 
@@ -350,67 +355,74 @@ class Project {
         cin.get();
     }
 
+    void intro() {
+        int choice;
+        system("cls");
+        system("color e");
+        cout << "\n\n\t==================== STUDENT REPORT CARD MANEGEMENT "
+                "SYSTEM ====================\n\n";
+        cout << "\t\t\t\t1. MAIN MENU\n\n";
+        cout << "\t\t\t\t2. EXIT\n\n";
+        cout << "ENTER YOUR CHOICE: ";
+        cin >> choice;
+        if (choice < 1 || choice > 2) {
+            intro();
+        } else {
+            do {
+                system("cls");
+                switch (choice) {
+                case 1: {
+                    main_menu();
+                    break;
+                }
+                case 2: {
+                    cout << "\t\t     THANK YOU FOR USING THIS SYSTEM\n";
+                    cout << "\n\n";
+                    cout << "\t______________________\n";
+                    cout << "\t|   MEMBERS          |\n";
+                    cout << "\t===================================================\n";
+                    cout << "\t| Arguil, Devyth               |        BSIT-1E   |\n";
+                    Sleep(300);
+                    cout << "\t|-------------------------------------------------|\n";
+                    cout << "\t| Ballarda, Audrey Rose        |        BSIT-1E   |\n";
+                    Sleep(300);
+                    cout << "\t|-------------------------------------------------|\n";
+                    cout << "\t| Caceres, Jan Darsey          |        BSIT-1E   |\n";
+                    Sleep(300);
+                    cout << "\t|-------------------------------------------------|\n";
+                    cout << "\t| Corporal, Alexis             |        BSIT-1E   |\n";
+                    Sleep(300);
+                    cout << "\t|-------------------------------------------------|\n";
+                    cout << "\t| Ducut, Rodelene              |        BSIT-1E   |\n";
+                    Sleep(300);
+                    cout << "\t|-------------------------------------------------|\n";
+                    cout << "\t| Lacdan, Peejay               |        BSIT-1E   |\n";
+                    Sleep(300);
+                    cout << "\t|-------------------------------------------------|\n";
+                    cout << "\t| Mendoza, Ronnel              |        BSIT-1E   |\n";
+                    Sleep(300);
+                    cout << "\t|-------------------------------------------------|\n";
+                    cout << "\t| Paliza, Janmar               |        BSIT-1E   |\n";
+                    Sleep(300);
+                    cout << "\t|-------------------------------------------------|\n";
+                    cout << "\t| San Luis, James Errol        |        BSIT-1E   |\n";
+                    Sleep(300);
+                    cout << "\t===================================================\n";
+                    cout << "\n\nPress Enter to exit...";
+                    cin.ignore();
+                    cin.get();
+                }
+                }
+            } while (choice != 2);
+        }
+    }
+
    public:
     void run() {
         system("color a");
-        char choice;
         system("cls");
+        dashboard();
         intro();
-
-        do {
-            system("cls");
-            system("color e");
-            cout << "\n\n\t==================== STUDENT REPORT CARD MANEGEMENT "
-                    "SYSTEM ====================\n\n";
-            cout << "\t\t\t\t1. MAIN MENU\n\n";
-            cout << "\t\t\t\t2. EXIT\n\n";
-            cout << "ENTER YOUR CHOICE: ";
-            cin >> choice;
-            system("cls");
-            switch (choice) {
-            case '1': {
-                main_menu();
-                break;
-            }
-            case '2': {
-                cout << "\t\t     THANK YOU FOR USING THIS SYSTEM\n";
-                cout << "\n\n";
-                cout << "\t______________________\n";
-                cout << "\t|   MEMBERS          |\n";
-                cout << "\t===================================================\n";
-                cout << "\t| Arguil, Devyth               |        BSIT-1E   |\n";
-                Sleep(300);
-                cout << "\t|-------------------------------------------------|\n";
-                cout << "\t| Ballarda, Audrey Rose        |        BSIT-1E   |\n";
-                Sleep(300);
-                cout << "\t|-------------------------------------------------|\n";
-                cout << "\t| Caceres, Jan Darsey          |        BSIT-1E   |\n";
-                Sleep(300);
-                cout << "\t|-------------------------------------------------|\n";
-                cout << "\t| Corporal, Alexis             |        BSIT-1E   |\n";
-                Sleep(300);
-                cout << "\t|-------------------------------------------------|\n";
-                cout << "\t| Ducut, Rodelene              |        BSIT-1E   |\n";
-                Sleep(300);
-                cout << "\t|-------------------------------------------------|\n";
-                cout << "\t| Lacdan, Peejay               |        BSIT-1E   |\n";
-                Sleep(300);
-                cout << "\t|-------------------------------------------------|\n";
-                cout << "\t| Mendoza, Ronnel              |        BSIT-1E   |\n";
-                Sleep(300);
-                cout << "\t|-------------------------------------------------|\n";
-                cout << "\t| Paliza, Janmar               |        BSIT-1E   |\n";
-                Sleep(300);
-                cout << "\t|-------------------------------------------------|\n";
-                cout << "\t| San Luis, James Errol        |        BSIT-1E   |\n";
-                Sleep(300);
-                cout << "\t===================================================\n";
-                cout << "\n\nPress Enter to exit...";
-                cin.ignore();
-                cin.get();
-            }
-            }
-        } while (choice != '2');
     }
 };
 
