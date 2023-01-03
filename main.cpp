@@ -149,7 +149,6 @@ class Project {
 
             s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101 + s.nstp1;
             s.average = (s.sum / 8);
-            cout << has_duplicate(s.id_number) << '\n';
             if (has_duplicate(s.id_number) == 0) {
                 output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
                 cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
@@ -175,7 +174,7 @@ class Project {
         bool equality = false;
         cout << "\t\t\t\t========== VIEW A SINGLE STUDENT REPORT ==========\n\n";
         while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-            if (s.id_number == id) {
+            if (strcmp(s.id_number, id) == 0) {
                 cout << "\t\t\t\t================================================\n";
                 cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
                 cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
@@ -261,7 +260,7 @@ class Project {
         input_file.seekg(0, ios::beg);
         cout << "\t\t\t\t=========== DELETE A REPORT CARD ==========\n\n";
         while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-            if (s.id_number != id) {
+            if (strcmp(s.id_number, id) == 1) {
                 output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
             }
         }
@@ -290,7 +289,7 @@ class Project {
         while (!input_file.eof() && checker == false) {
             input_file.read(reinterpret_cast<char *>(&s), sizeof(student));
             {
-                if (s.id_number == id) {
+                if (strcmp(s.id_number, id) == 0) {
                     cout << "\t\t\t\t================================================\n";
                     cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
                     cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
@@ -337,18 +336,19 @@ class Project {
                         input_file.seekp(pos, ios::cur);
                         input_file.write(reinterpret_cast<char *>(&s), sizeof(student));
                         cout << "\n\t\t\t\tSUCCESSFULLY UPDATED!!!\n";
-                        cout << "Press Enter to continue...";
+                        cout << "\nPress Enter to continue...";
                     } else {
-                        add_record();
+                        modify_record(s.id_number);
                     }
                     checker = true;
                 }
             }
         }
         input_file.close();
-        if (checker == false)
+        if (checker == false) {
             cout << "\t\t\t\tRECORD NOT FOUND :(\n";
-        cout << "\nPress Enter to continue...";
+            cout << "\nPress Enter to continue...";
+        }
         cin.ignore();
         cin.get();
     }
