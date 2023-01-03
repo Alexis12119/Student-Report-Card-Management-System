@@ -40,21 +40,13 @@ class Project {
         char choice;
         char id[10];
         cout << "\t\t\t\t================= MAIN MENU ================\n\n\n";
-        Sleep(300);
         cout << "\t\t\t\t1. CREATE STUDENT REPORT CARD\n\n\n";
-        Sleep(300);
         cout << "\t\t\t\t2. VIEW ALL STUDENTS REPORT CARD\n\n\n";
-        Sleep(300);
         cout << "\t\t\t\t3. VIEW A SINGLE STUDENT REPORT CARD\n\n\n";
-        Sleep(300);
         cout << "\t\t\t\t4. MODIFY REPORT CARD\n\n\n";
-        Sleep(300);
         cout << "\t\t\t\t5. DELETE RECORD\n\n\n";
-        Sleep(300);
         cout << "\t\t\t\t=============================================\n";
-        Sleep(300);
         cout << "\t\t\t\tENTER YOUR CHOICE(1-5): ";
-        Sleep(300);
         cin >> choice;
         cout << '\n';
         switch (choice) {
@@ -260,7 +252,7 @@ class Project {
         input_file.seekg(0, ios::beg);
         cout << "\t\t\t\t=========== DELETE A REPORT CARD ==========\n\n";
         while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-            if (strcmp(s.id_number, id) == 1) {
+            if (strcmp(s.id_number, id) != 0) {
                 output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
             }
         }
