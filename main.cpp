@@ -1,5 +1,5 @@
 /**
-TODO: Add Comments, Fix duplicate entries, and Make user interface look good.
+TODO: Add Comments and Make user interface look good.
   **/
 #include <windows.h>
 
@@ -91,6 +91,25 @@ class Project {
         }
         }
     }
+
+    bool has_duplicate(int number) {
+        student s;
+        ifstream input_file;
+        input_file.open("Data.txt", ios::app | ios::binary);
+        if (input_file.fail()) {
+            cout << "THE FILE COULD NOT BE OPENED...";
+            cin.ignore();
+            cin.get();
+        }
+        while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
+            if (s.roll == number) {
+                return 1;
+            }
+        }
+        input_file.close();
+        return 0;
+    }
+
     void add_record() {
         system("cls");
         student s;
@@ -103,6 +122,10 @@ class Project {
         } else {
             cout << "\n\n";
             cout << "\t\t\t\t======= CREATE A REPORT CARD ========\n\n";
+            cout << "\n\t\t\t\t\tNOTE: When duplicate roll number detected, the system won't "
+                    "accept the informations\n";
+            cout << "\n\t\t\t\t\tDon't worry, the system will ask you again, if it detects a "
+                    "duplicate\n";
             cout << "ENTER YOUR FULL NAME: ";
             cin.ignore();
             cin.getline(s.name, 80);
@@ -128,10 +151,14 @@ class Project {
             cin >> s.nstp1;
             s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101 + s.nstp1;
             s.average = (s.sum / 8);
-            output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
-            output_file.close();
-            cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
+            if (has_duplicate(s.roll) == 0) {
+                output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
+                cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
+            } else {
+                add_record();
+            }
             cout << "Press Enter to continue...";
+            output_file.close();
             cin.ignore();
             cin.get();
         }
@@ -139,16 +166,16 @@ class Project {
     void view_specific_record(int number) {
         system("cls");
         student s;
-        ifstream infile;
-        infile.open("Data.txt", ios::app | ios::binary);
-        if (infile.fail()) {
+        ifstream input_file;
+        input_file.open("Data.txt", ios::app | ios::binary);
+        if (input_file.fail()) {
             cout << "THE FILE COULD NOT BE OPENED...";
             cin.ignore();
             cin.get();
         }
         bool equality = false;
         cout << "\t\t\t\t========== VIEW A SINGLE STUDENT REPORT ==========\n\n";
-        while (infile.read(reinterpret_cast<char *>(&s), sizeof(student))) {
+        while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
             if (s.roll == number) {
                 cout << "\t\t\t\t================================================\n";
                 cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
@@ -170,7 +197,7 @@ class Project {
                 equality = true;
             }
         }
-        infile.close();
+        input_file.close();
         if (equality == false)
             cout << "\t\t\t\tRECORD NOT FOUND :(\n\n";
         cout << "Press Enter to continue...";
@@ -180,10 +207,10 @@ class Project {
     void view_all_records() {
         system("cls");
         student s;
-        ifstream infile;
+        ifstream input_file;
         bool check = false;
-        infile.open("Data.txt", ios::app | ios::binary);
-        if (infile.fail()) {
+        input_file.open("Data.txt", ios::app | ios::binary);
+        if (input_file.fail()) {
             cout << "THE FILE COULD NOT BE OPENED.....Press Enter...";
             cin.ignore();
             cin.get();
@@ -191,7 +218,7 @@ class Project {
             cout << "\n\n\t\t\t\tALL STUDENTS REPORT CARDS\n";
             cout << "===================================================================="
                     "==============\n";
-            while (infile.read(reinterpret_cast<char *>(&s), sizeof(student))) {
+            while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
                 cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
                 cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
                 cout << "\t\t\t\tSTUDENT ROLL NUMBER: " << s.roll << "\n\n";
@@ -210,7 +237,7 @@ class Project {
 
                 check = true;
             }
-            infile.close();
+            input_file.close();
             if (check == false)
                 cout << "\t\t\t\tNO RECORD FOUND :(\n\n";
             cout << "Press Enter to continue....";
