@@ -111,7 +111,7 @@ class Project {
     }
 
     void ask_input(struct student &s) {
-        cout << "\tNOTE: When duplicate id number detected, the system won't "
+        cout << "\tNOTE: When duplicate id number detected or no id number, the system won't "
                 "accept the informations\n";
         cout << "\tDon't worry, the system will ask you again, if it detects a "
                 "duplicate\n\n";
@@ -119,7 +119,7 @@ class Project {
         cin.ignore();
         cin.getline(s.name, 80);
         cout << "ENTER YOUR STUDENT ID NUMBER: ";
-        cin.get(s.id_number, 10);
+        cin.getline(s.id_number, 10);
         cout << "ENTER YOUR CC112 GRADE: ";
         cin >> s.cc112;
         cout << "ENTER YOUR GE101 GRADE: ";
