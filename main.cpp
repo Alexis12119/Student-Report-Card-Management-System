@@ -368,7 +368,7 @@ class Project {
 
     void intro() {
         system("cls");
-        int choice;
+        string choice;
         system("cls");
         system("color e");
         cout << "\n\n\t==================== STUDENT REPORT CARD MANEGEMENT "
@@ -377,7 +377,7 @@ class Project {
         cout << "\t\t\t\t2. EXIT\n\n";
         cout << "ENTER YOUR CHOICE: ";
         cin >> choice;
-        if (choice == 2) {
+        if (choice == "2") {
             cout << "\t\t     THANK YOU FOR USING THIS SYSTEM\n";
             cout << "\n\n";
             cout << "\t______________________\n";
@@ -413,8 +413,10 @@ class Project {
             cout << "\n\nPress Enter to exit...";
             cin.ignore();
             cin.get();
-        } else {
+        } else if (choice == "1") {
             main_menu();
+        } else {
+            intro();
         }
     }
 
