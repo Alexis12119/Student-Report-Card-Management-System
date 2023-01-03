@@ -1,6 +1,7 @@
 /**
 TODO: Add Comments and Make user interface look good.
   **/
+#include <stdlib.h>
 #include <string.h>
 #include <windows.h>
 
@@ -46,10 +47,11 @@ class Project {
         cout << "\t\t\t\t3. VIEW A SINGLE STUDENT REPORT CARD\n\n\n";
         cout << "\t\t\t\t4. MODIFY REPORT CARD\n\n\n";
         cout << "\t\t\t\t5. DELETE RECORD\n\n\n";
+        cout << "\t\t\t\t6. BACK\n\n\n";
         cout << "\t\t\t\t=============================================\n";
-        cout << "\t\t\t\tENTER YOUR CHOICE(1-5): ";
+        cout << "\t\t\t\tENTER YOUR CHOICE(1-6): ";
         cin >> choice;
-        if (choice < 1 || choice > 5) {
+        if (choice < 1 || choice > 6) {
             main_menu();
         } else {
             cout << '\n';
@@ -82,6 +84,10 @@ class Project {
                 cin >> id;
                 cout << '\n';
                 delete_record(id);
+                break;
+            }
+            case 6: {
+                intro();
                 break;
             }
             }
@@ -283,11 +289,6 @@ class Project {
         }
         bool checker = false;
         cout << "\t\t\t\t========== MODIFY A REPORT CARD ==========\n\n";
-        cout << "\tNOTE: When duplicate id number detected, the system won't "
-                "accept the informations\n";
-        cout << "\tDon't worry, the system will ask you again, if it detects a "
-                "duplicate\n\n";
-
         while (!input_file.eof() && checker == false) {
             input_file.read(reinterpret_cast<char *>(&s), sizeof(student));
             {
@@ -308,6 +309,11 @@ class Project {
                     cout << "=============================================\n";
                     cout << "\t\tENTER THE NEW INFORMATION\n";
                     cout << "=============================================\n";
+                    cout << "NOTE: When duplicate id number detected, the system won't "
+                            "accept the informations\n";
+                    cout << "Don't worry, the system will ask you again, if it detects a "
+                            "duplicate\n\n";
+
                     cout << "ENTER YOUR FULL NAME: ";
                     cin.ignore();
                     cin.getline(s.name, 80);
@@ -356,20 +362,20 @@ class Project {
     }
 
     void intro() {
-        int choice;
         system("cls");
-        system("color e");
-        cout << "\n\n\t==================== STUDENT REPORT CARD MANEGEMENT "
-                "SYSTEM ====================\n\n";
-        cout << "\t\t\t\t1. MAIN MENU\n\n";
-        cout << "\t\t\t\t2. EXIT\n\n";
-        cout << "ENTER YOUR CHOICE: ";
-        cin >> choice;
-        if (choice < 1 || choice > 2) {
-            intro();
-        } else {
-            do {
-                system("cls");
+        int choice;
+        do {
+            system("cls");
+            system("color e");
+            cout << "\n\n\t==================== STUDENT REPORT CARD MANEGEMENT "
+                    "SYSTEM ====================\n\n";
+            cout << "\t\t\t\t1. MAIN MENU\n\n";
+            cout << "\t\t\t\t2. EXIT\n\n";
+            cout << "ENTER YOUR CHOICE: ";
+            cin >> choice;
+            if (choice < 1 || choice > 2) {
+                intro();
+            } else {
                 switch (choice) {
                 case 1: {
                     main_menu();
@@ -411,10 +417,11 @@ class Project {
                     cout << "\n\nPress Enter to exit...";
                     cin.ignore();
                     cin.get();
+                    exit(0);
                 }
                 }
-            } while (choice != 2);
-        }
+            }
+        } while (choice != 2);
     }
 
    public:
