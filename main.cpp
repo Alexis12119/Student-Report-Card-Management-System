@@ -68,21 +68,21 @@ class Project {
         }
         case '3': {
             system("cls");
-            cout << "ENTER YOUR ROLL NUMBER: ";
+            cout << "ENTER YOUR STUDENT ID NUMBER: ";
             cin >> id;
             view_specific_record(id);
             break;
         }
         case '4': {
             system("cls");
-            cout << "ENTER YOUR ROLL NUMBER: ";
+            cout << "ENTER YOUR STUDENT ID NUMBER: ";
             cin >> id;
             modify_record(id);
             break;
         }
         case '5': {
             system("cls");
-            cout << "ENTER YOUR ROLL NUMBER: ";
+            cout << "ENTER YOUR STUDENT ID NUMBER: ";
             cin >> id;
             cout << '\n';
             delete_record(id);
