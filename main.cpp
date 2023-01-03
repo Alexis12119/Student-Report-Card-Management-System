@@ -1,6 +1,7 @@
 /**
 TODO: Add Comments and Make user interface look good.
   **/
+#include <string.h>
 #include <windows.h>
 
 #include <fstream>
@@ -100,7 +101,7 @@ class Project {
             cin.get();
         }
         while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-            if (s.id_number == id) {
+            if (strcmp(s.id_number, id) == 0) {
                 return 1;
             }
         }
@@ -152,10 +153,10 @@ class Project {
             if (has_duplicate(s.id_number) == 0) {
                 output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
                 cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
+                cout << "Press Enter to continue...";
             } else {
                 add_record();
             }
-            cout << "Press Enter to continue...";
             output_file.close();
             cin.ignore();
             cin.get();
@@ -331,10 +332,15 @@ class Project {
                     s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101
                             + s.nstp1;
                     s.average = (s.sum / 8);
-                    int pos = (-1) * static_cast<int>(sizeof(student));
-                    input_file.seekp(pos, ios::cur);
-                    input_file.write(reinterpret_cast<char *>(&s), sizeof(student));
-                    cout << "\n\t\t\t\tSUCCESSFULLY UPDATED!!!\n";
+                    if (has_duplicate(s.id_number) == 0) {
+                        int pos = (-1) * static_cast<int>(sizeof(student));
+                        input_file.seekp(pos, ios::cur);
+                        input_file.write(reinterpret_cast<char *>(&s), sizeof(student));
+                        cout << "\n\t\t\t\tSUCCESSFULLY UPDATED!!!\n";
+                        cout << "Press Enter to continue...";
+                    } else {
+                        add_record();
+                    }
                     checker = true;
                 }
             }
