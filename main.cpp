@@ -12,7 +12,7 @@ using namespace std;
 
 class Project {
     struct student {
-        char name[INT_MAX], id_number[INT_MAX];
+        char name[80], id_number[10];
         int ge101, fil101, ge102, cc112, pe1, lite, cc111, nstp1, sum, average;
     };
 
@@ -41,7 +41,7 @@ class Project {
         system("cls");
         system("color 7");
         string choice;
-        char id[INT_MAX];
+        char id[10];
         cout << "\t\t\t\t================= MAIN MENU ================\n\n\n";
         cout << "\t\t\t\t1. CREATE STUDENT REPORT CARD\n\n\n";
         cout << "\t\t\t\t2. VIEW ALL STUDENTS REPORT CARD\n\n\n";
@@ -112,14 +112,14 @@ class Project {
 
     void ask_input(struct student &s) {
         cout << "\tNOTE: When duplicate id number detected or no id number, the system won't "
-                "accept the informations\n";
+                "accept the datas\n";
         cout << "\tDon't worry, the system will ask you again, if it detects a "
                 "duplicate\n\n";
         cout << "ENTER YOUR FULL NAME: ";
         cin.ignore();
-        cin.getline(s.name, INT_MAX);
+        cin.getline(s.name, 80);
         cout << "ENTER YOUR STUDENT ID NUMBER: ";
-        cin.getline(s.id_number, INT_MAX);
+        cin.getline(s.id_number, 10);
         cout << "ENTER YOUR CC112 GRADE: ";
         cin >> s.cc112;
         cout << "ENTER YOUR GE101 GRADE: ";
