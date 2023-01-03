@@ -39,7 +39,7 @@ class Project {
 
     void main_menu() {
         system("color 7");
-        int choice;
+        string choice;
         char id[10];
         cout << "\t\t\t\t================= MAIN MENU ================\n\n\n";
         cout << "\t\t\t\t1. CREATE STUDENT REPORT CARD\n\n\n";
@@ -51,51 +51,39 @@ class Project {
         cout << "\t\t\t\t=============================================\n";
         cout << "\t\t\t\tENTER YOUR CHOICE(1-6): ";
         cin >> choice;
-        if (choice < 1 || choice > 6) {
+        cout << '\n';
+
+        if (choice == "1") {
+            add_record();
             main_menu();
+
+        } else if (choice == "2") {
+            view_all_records();
+            main_menu();
+
+        } else if (choice == "3") {
+            system("cls");
+            cout << "ENTER YOUR STUDENT ID NUMBER: ";
+            cin >> id;
+            view_specific_record(id);
+            main_menu();
+
+        } else if (choice == "4") {
+            system("cls");
+            cout << "ENTER YOUR STUDENT ID NUMBER: ";
+            cin >> id;
+            modify_record(id);
+            main_menu();
+
+        } else if (choice == "5") {
+            delete_record(id);
+            main_menu();
+
+        } else if (choice == "6") {
+            intro();
+
         } else {
-            cout << '\n';
-            switch (choice) {
-            case 1: {
-                add_record();
-                main_menu();
-                break;
-            }
-            case 2: {
-                view_all_records();
-                main_menu();
-                break;
-            }
-            case 3: {
-                system("cls");
-                cout << "ENTER YOUR STUDENT ID NUMBER: ";
-                cin >> id;
-                view_specific_record(id);
-                main_menu();
-                break;
-            }
-            case 4: {
-                system("cls");
-                cout << "ENTER YOUR STUDENT ID NUMBER: ";
-                cin >> id;
-                modify_record(id);
-                main_menu();
-                break;
-            }
-            case 5: {
-                system("cls");
-                cout << "ENTER YOUR STUDENT ID NUMBER: ";
-                cin >> id;
-                cout << '\n';
-                delete_record(id);
-                main_menu();
-                break;
-            }
-            case 6: {
-                intro();
-                break;
-            }
-            }
+            main_menu();
         }
     }
 
