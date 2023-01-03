@@ -286,6 +286,11 @@ class Project {
         }
         bool checker = false;
         cout << "\t\t\t\t========== MODIFY A REPORT CARD ==========\n\n";
+        cout << "\tNOTE: When duplicate id number detected, the system won't "
+                "accept the informations\n";
+        cout << "\tDon't worry, the system will ask you again, if it detects a "
+                "duplicate\n\n";
+
         while (!input_file.eof() && checker == false) {
             input_file.read(reinterpret_cast<char *>(&s), sizeof(student));
             {
