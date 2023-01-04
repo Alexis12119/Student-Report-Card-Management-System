@@ -14,7 +14,8 @@ FIX: Over characters in name and id number when asking input
 using namespace std;
 
 class Project {
-    // Student datas
+    // Declare a struct
+    // To unify the student informations
     struct student {
         // name and id number
         char name[80], id_number[10];
