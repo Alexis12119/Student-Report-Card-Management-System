@@ -145,17 +145,18 @@ class Project {
     }
 
     // To shorten the code
-    // Pass the struct
+    // Passing struct in the function
     void ask_input(struct student &s) {
         cout << "\tNOTE: When duplicate id number detected or no id number, the system won't "
                 "accept the datas\n";
         cout << "\tDon't worry, the system will ask you again, if it detects a "
                 "duplicate\n\n";
         cin.ignore();
-        // Run until the count of characters is <= 80
         while (1) {
             cout << "ENTER YOUR FULL NAME: ";
+            // Ask for input
             cin.getline(s.name, 100);
+            // Check if the no. of characters is <= 80
             if (strlen(s.name) <= 80) {
                 break;
             } else {
@@ -163,10 +164,11 @@ class Project {
                 cout << "Please, Try Again!!!\n";
             }
         }
-        // Run until the count of characters is <= 10
         while (1) {
-            cout << "ENTER YOUR STUDENT ID NUMBER: ";
+            cout << "ENTER YOUR STUDENT ID NUMBER(PLSP): ";
+            // Ask for input
             cin.getline(s.id_number, 100);
+            // Check if the no. of characters is <= 10
             if (strlen(s.id_number) <= 10) {
                 break;
             } else {
@@ -193,7 +195,7 @@ class Project {
     }
 
     // To shorten the code
-    // Pass the struct
+    // Passing struct in the function
     void show_info(struct student &s) {
         cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
         cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
