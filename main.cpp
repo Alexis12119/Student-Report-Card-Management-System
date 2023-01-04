@@ -205,8 +205,6 @@ class Project {
         // If failed then don't run
         if (output_file.fail()) {
             cout << "THE FILE COULD NOT BE OPEN...Press Enter";
-            cin.ignore();
-            cin.get();
         } else {
             cout << "\n\n";
             cout << "\t\t\t\t======= CREATE A REPORT CARD ========\n\n";
