@@ -33,8 +33,6 @@ class Project {
         Sleep(500);
         cout << "\t\t\t=======================================================\n\n\n";
         Sleep(500);
-        cout << "Press Enter to continue...";
-        cin.ignore();
     }
 
     void main_menu() {
@@ -391,7 +389,25 @@ class Project {
         system("color a");
         system("cls");
         dashboard();
-        intro();
+        string input;
+        int limit = 5;
+        cout << "Please Enter the password to access the system\n";
+        while (limit--) {
+            cout << "Password: ";
+            getline(cin, input);
+            if (input == "1234") {
+                intro();
+                break;
+            } else {
+                if (limit == 0) {
+                    cout << "Sorry, You've reached the limit!!!\n";
+                    cout << "You can't access the system!!!\n";
+                    break;
+                } else {
+                    cout << "Wrong, You have " << limit << " chance/s left\n";
+                }
+            }
+        }
     }
 };
 
