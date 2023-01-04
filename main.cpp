@@ -151,10 +151,10 @@ class Project {
                 "accept the datas\n";
         cout << "\tDon't worry, the system will ask you again, if it detects a "
                 "duplicate\n\n";
-        cout << "ENTER YOUR FULL NAME(80 characters only): ";
+        cout << "ENTER YOUR FULL NAME: ";
         cin.ignore();
         cin.getline(s.name, 100);
-        cout << "ENTER YOUR STUDENT ID NUMBER(10 characters only): ";
+        cout << "ENTER YOUR STUDENT ID NUMBER: ";
         cin.getline(s.id_number, 100);
         cout << "ENTER YOUR CC112 GRADE: ";
         cin >> s.cc112;
