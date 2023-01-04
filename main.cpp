@@ -1,6 +1,3 @@
-/*
-FIX: Over characters in name and id number when asking input
-   */
 // String library
 #include <string.h>
 // For windows operation
@@ -18,7 +15,7 @@ class Project {
     // To unify the student informations
     struct student {
         // name and id number
-        char name[80], id_number[10];
+        char name[1000], id_number[1000];
         // Subjects
         int ge101, fil101, ge102, cc112, pe1, lite, cc111, nstp1, sum, average;
     };
@@ -57,7 +54,7 @@ class Project {
         // Color white
         system("color 7");
         string choice;
-        char id[10];
+        char id[1000];
         // Print
         cout << "\t\t\t\t================= MAIN MENU ================\n\n\n";
         cout << "\t\t\t\t1. CREATE STUDENT REPORT CARD\n\n\n";
@@ -156,9 +153,9 @@ class Project {
                 "duplicate\n\n";
         cout << "ENTER YOUR FULL NAME(80 characters only): ";
         cin.ignore();
-        cin.getline(s.name, 80);
+        cin.getline(s.name, 1000);
         cout << "ENTER YOUR STUDENT ID NUMBER(10 characters only): ";
-        cin.getline(s.id_number, 10);
+        cin.getline(s.id_number, 1000);
         cout << "ENTER YOUR CC112 GRADE: ";
         cin >> s.cc112;
         cout << "ENTER YOUR GE101 GRADE: ";
