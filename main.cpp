@@ -1,45 +1,63 @@
-/**
-TODO: Add Comments and Make user interface look good.
-  **/
-#include <stdlib.h>
+/*
+FIX: Over characters in name and id number when asking input
+   */
+// String library
 #include <string.h>
+// For windows operation
 #include <windows.h>
 
+// For file handling
 #include <fstream>
+// Input and output
 #include <iostream>
 
 using namespace std;
 
 class Project {
+    // Student datas
     struct student {
+        // name and id number
         char name[80], id_number[10];
+        // Subjects
         int ge101, fil101, ge102, cc112, pe1, lite, cc111, nstp1, sum, average;
     };
 
+    // Welcome screen
     void dashboard() {
+        // Add spaces
         cout << "\n\n\n";
+        // For animation
         Sleep(300);
         cout << "\t\t\t_  _  _ _______        _______  _____  _______ _______\n";
+        // For animation
         Sleep(300);
         cout << "\t\t\t|  |  | |______ |      |       |     | |  |  | |______\n";
+        // For animation
         Sleep(300);
         cout << "\t\t\t|__|__| |______ |_____ |_____  |_____| |  |  | |______\n";
+        // For animation
         Sleep(300);
 
         cout << "\n\t\t\t=======================================================\n";
+        // For animation
         Sleep(500);
         cout << "\t\t\t\tSTUDENT REPORT CARD MANEGEMENT SYSTEM\n";
         cout << "\t\t\t\t\t      BY GROUP 3\n";
+        // For animation
         Sleep(500);
         cout << "\t\t\t=======================================================\n\n\n";
+        // For animation
         Sleep(500);
     }
 
     void main_menu() {
+        // For animation purposes
         system("cls");
+        // Color white
         system("color 7");
         string choice;
         char id[10];
+        // Print
         cout << "\t\t\t\t================= MAIN MENU ================\n\n\n";
         cout << "\t\t\t\t1. CREATE STUDENT REPORT CARD\n\n\n";
         cout << "\t\t\t\t2. VIEW ALL STUDENTS REPORT CARD\n\n\n";
@@ -49,65 +67,87 @@ class Project {
         cout << "\t\t\t\t6. BACK\n\n\n";
         cout << "\t\t\t\t=============================================\n";
         cout << "\t\t\t\tENTER YOUR CHOICE(1-6): ";
+        // Ask user for input
         cin >> choice;
         cout << '\n';
 
         if (choice == "1") {
+            // Create new report card
             add_record();
+            // Back to main menu when the function is finished
             main_menu();
 
         } else if (choice == "2") {
+            // View all Report cards
             view_all_records();
+            // Back to main menu when the function is finished
             main_menu();
 
         } else if (choice == "3") {
+            // For animation purposes
             system("cls");
             cout << "ENTER YOUR STUDENT ID NUMBER: ";
             cin >> id;
+            // View a specific report card
             view_specific_record(id);
+            // Back to main menu when the function is finished
             main_menu();
 
         } else if (choice == "4") {
+            // For animation purposes
             system("cls");
             cout << "ENTER YOUR STUDENT ID NUMBER: ";
             cin >> id;
+            // Modify a report card
+            // In case when there's a correction
             modify_record(id);
+            // Back to main menu when the function is finished
             main_menu();
 
         } else if (choice == "5") {
+            // For animation purposes
             system("cls");
             cout << "ENTER YOUR STUDENT ID NUMBER: ";
             cin >> id;
+            // Delete a specific report card
             delete_record(id);
+            // Back to main menu when the function is finished
             main_menu();
 
         } else if (choice == "6") {
+            // Back to intro screen
             intro();
 
         } else {
             system("cls");
+            // In case when the input is less than 1 or more than 6
             main_menu();
         }
     }
 
+    // Check for duplicate
     bool has_duplicate(char *id) {
+        // Don't check if the file is successfull opened
+        // Since the operation is already done
+        // When this functions is called
+        // Initialize variables
         student s;
         ifstream input_file;
+        // Open the file
         input_file.open("Data.txt", ios::app | ios::binary);
-        if (input_file.fail()) {
-            cout << "THE FILE COULD NOT BE OPENED...";
-            cin.ignore();
-            cin.get();
-        }
+        // Search for same id number
         while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
             if (strcmp(s.id_number, id) == 0) {
                 return 1;
             }
         }
+        // Close the file
         input_file.close();
         return 0;
     }
 
+    // To shorten the code
+    // Pass the struct
     void ask_input(struct student &s) {
         cout << "\tNOTE: When duplicate id number detected or no id number, the system won't "
                 "accept the datas\n";
@@ -136,6 +176,8 @@ class Project {
         cin >> s.nstp1;
     }
 
+    // To shorten the code
+    // Pass the struct
     void show_info(struct student &s) {
         cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
         cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
@@ -152,10 +194,14 @@ class Project {
     }
 
     void add_record() {
+        // For animation purposes
         system("cls");
+        // Initialize variables
         student s;
         ofstream output_file;
+        // Open the file
         output_file.open("Data.txt", ios::app | ios::binary);
+        // If failed then don't run
         if (output_file.fail()) {
             cout << "THE FILE COULD NOT BE OPEN...Press Enter";
             cin.ignore();
@@ -166,25 +212,33 @@ class Project {
             ask_input(s);
             s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101 + s.nstp1;
             s.average = (s.sum / 8);
+            // Check if there's a duplicate
             if (has_duplicate(s.id_number) == 0) {
+                // If no duplicate then add the informations
                 output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
                 cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
                 cout << "Press Enter to continue...";
             } else {
+                // If yes then restart
                 add_record();
             }
+            // Close the file
             output_file.close();
-            cin.ignore();
-            cin.get();
         }
+        cin.ignore();
+        cin.get();
     }
 
     void view_all_records() {
+        // For animation purposes
         system("cls");
+        // Initialize variables
         student s;
         ifstream input_file;
         bool check = false;
+        // Open the file
         input_file.open("Data.txt", ios::app | ios::binary);
+        // If failed then don't run
         if (input_file.fail()) {
             cout << "THE FILE COULD NOT BE OPENED.....Press Enter...";
             cin.ignore();
@@ -193,155 +247,191 @@ class Project {
             cout << "\n\n\t\t\t\tALL STUDENTS REPORT CARDS\n";
             cout << "===================================================================="
                     "==============\n";
+            // Show all records through while loop
             while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
                 show_info(s);
                 cout << "=================================================================="
                         "================\n";
-
+                // To check if there's informations
                 check = true;
             }
+            // Close the file
             input_file.close();
+            // Check if there's any informations
             if (check == false)
                 cout << "\t\t\t\tNO RECORD FOUND :(\n\n";
             cout << "Press Enter to continue....";
-            cin.ignore();
-            cin.get();
         }
+        cin.ignore();
+        cin.get();
     }
 
     void view_specific_record(char *id) {
+        // For animation purposes
         system("cls");
+        // Initialize variables
         student s;
         ifstream input_file;
+        bool equality = false;
+        // Open the file
         input_file.open("Data.txt", ios::app | ios::binary);
+        // If failed then don't run
         if (input_file.fail()) {
             cout << "THE FILE COULD NOT BE OPENED...";
             cin.ignore();
             cin.get();
-        }
-        bool equality = false;
-        cout << "\t\t\t\t========== VIEW A SINGLE STUDENT REPORT ==========\n\n";
-        while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-            if (strcmp(s.id_number, id) == 0) {
-                cout << "\t\t\t\t================================================\n";
-                show_info(s);
-                cout << "=================================================================="
-                        "================\n";
+        } else {
+            cout << "\t\t\t\t========== VIEW A SINGLE STUDENT REPORT ==========\n\n";
+            // Search for the specific report card
+            while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
+                if (strcmp(s.id_number, id) == 0) {
+                    cout << "\t\t\t\t================================================\n";
+                    show_info(s);
+                    cout << "=================================================================="
+                            "================\n";
 
-                equality = true;
+                    equality = true;
+                }
             }
+            // Close the file
+            input_file.close();
+            // Check if there's any informations
+            if (equality == false)
+                cout << "\t\t\t\tRECORD NOT FOUND :(\n\n";
+            cout << "Press Enter to continue...";
         }
-        input_file.close();
-        if (equality == false)
-            cout << "\t\t\t\tRECORD NOT FOUND :(\n\n";
-        cout << "Press Enter to continue...";
         cin.ignore();
         cin.get();
     }
 
     void modify_record(char *id) {
+        // For animation purposes
         system("cls");
+        // Initialize variables
         student s;
         fstream input_file;
+        bool checker = false;
+        // Open the file
         input_file.open("Data.txt", ios::binary | ios::in | ios::out);
+        // If failed then don't run
         if (input_file.fail()) {
             cout << "THE FILE COULD NOT BE OPENED...\n";
             cin.ignore();
             cin.get();
-        }
-        bool checker = false;
-        cout << "\t\t\t\t========== MODIFY A REPORT CARD ==========\n\n";
-        while (!input_file.eof() && checker == false) {
-            input_file.read(reinterpret_cast<char *>(&s), sizeof(student));
-            {
-                if (strcmp(s.id_number, id) == 0) {
-                    cout << "\t\t\t\t================================================\n";
-                    show_info(s);
-                    cout << "=============================================\n";
-                    cout << "\t\tENTER THE NEW INFORMATION\n";
-                    cout << "=============================================\n";
-                    ask_input(s);
+        } else {
+            cout << "\t\t\t\t========== MODIFY A REPORT CARD ==========\n\n";
+            // Check until the last part of the file
+            while (!input_file.eof() && checker == false) {
+                // Search for the specific report card
+                input_file.read(reinterpret_cast<char *>(&s), sizeof(student));
+                {
+                    if (strcmp(s.id_number, id) == 0) {
+                        // Modify the informations when it found the same id number
+                        cout << "\t\t\t\t================================================\n";
+                        show_info(s);
+                        cout << "=============================================\n";
+                        cout << "\t\tENTER THE NEW INFORMATION\n";
+                        cout << "=============================================\n";
+                        ask_input(s);
 
-                    s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101
-                            + s.nstp1;
-                    s.average = (s.sum / 8);
-                    if (has_duplicate(s.id_number) == 0) {
-                        int pos = (-1) * static_cast<int>(sizeof(student));
-                        input_file.seekp(pos, ios::cur);
-                        input_file.write(reinterpret_cast<char *>(&s), sizeof(student));
-                        cout << "\n\t\t\t\tSUCCESSFULLY UPDATED!!!\n";
-                        cout << "\nPress Enter to continue...";
-                    } else {
-                        modify_record(s.id_number);
+                        s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101
+                                + s.nstp1;
+                        s.average = (s.sum / 8);
+                        // Check for duplicate of id number
+                        if (has_duplicate(s.id_number) == 0) {
+                            int pos = (-1) * static_cast<int>(sizeof(student));
+                            input_file.seekp(pos, ios::cur);
+                            input_file.write(reinterpret_cast<char *>(&s), sizeof(student));
+                            cout << "\n\t\t\t\tSUCCESSFULLY UPDATED!!!\n";
+                            cout << "\nPress Enter to continue...";
+                        } else {
+                            modify_record(s.id_number);
+                        }
+                        checker = true;
                     }
-                    checker = true;
+                }
+                if (checker == false) {
+                    cout << "\t\t\t\tRECORD NOT FOUND :(\n";
+                    cout << "\nPress Enter to continue...";
                 }
             }
+            // Close the file
+            input_file.close();
+            cin.ignore();
+            cin.get();
         }
-        input_file.close();
-        if (checker == false) {
-            cout << "\t\t\t\tRECORD NOT FOUND :(\n";
-            cout << "\nPress Enter to continue...";
-        }
-        cin.ignore();
-        cin.get();
     }
 
     void delete_record(char *id) {
+        // For animation purposes
         system("cls");
+        // Initialize variables
         student s;
         bool check = 0;
         ifstream input_file;
         ofstream output_file;
+        // Open the file
         input_file.open("Data.txt", ios::binary);
+        // If failed then don't run
         if (!input_file) {
             cout << "THE FILE COULD NOT BE OPENED...\n";
             cin.ignore();
             cin.get();
-        }
-        // Check if there's any record
-        while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-            if (strcmp(s.id_number, id) == 0) {
-                check = 1;
-                break;
-            }
-        }
-        cout << "\t\t\t\t=========== DELETE A REPORT CARD ==========\n\n";
-        if (check) {
+        } else {
+            // Check if there's any record
             while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-                if (strcmp(s.id_number, id) != 0) {
-                    output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
+                if (strcmp(s.id_number, id) == 0) {
+                    check = 1;
+                    break;
                 }
             }
-            output_file.open("Backup.txt", ios::binary);
-            input_file.seekg(0, ios::beg);
-            input_file.close();
-            output_file.close();
-            remove("Data.txt");
-            rename("Backup.txt", "Data.txt");
-            cout << "\n\t\t\t\tSUCCESSFULLY DELETED!!!\n";
-        } else {
-            input_file.close();
-            output_file.close();
-            cout << "\t\t\t\tNO RECORD FOUND :(\n\n";
+            cout << "\t\t\t\t=========== DELETE A REPORT CARD ==========\n\n";
+            // If yes, then delete that specific report card
+            if (check) {
+                while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
+                    if (strcmp(s.id_number, id) != 0) {
+                        output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
+                    }
+                }
+                output_file.open("Backup.txt", ios::binary);
+                input_file.seekg(0, ios::beg);
+                input_file.close();
+                output_file.close();
+                remove("Data.txt");
+                rename("Backup.txt", "Data.txt");
+                cout << "\n\t\t\t\tSUCCESSFULLY DELETED!!!\n";
+            } else {
+                // Close the files
+                input_file.close();
+                output_file.close();
+                cout << "\t\t\t\tNO RECORD FOUND :(\n\n";
+            }
+            cout << "Press Enter to continue...";
+            cin.ignore();
+            cin.get();
         }
-        cout << "Press Enter to continue...";
-        cin.ignore();
-        cin.get();
     }
 
     void intro() {
+        // Initialize variables
         string choice;
+        // For animation purposes
         system("cls");
+        // Color Yellow
         system("color e");
+        // Print
         cout << "\n\n\t==================== STUDENT REPORT CARD MANEGEMENT "
                 "SYSTEM ====================\n\n";
         cout << "\t\t\t\t1. MAIN MENU\n\n";
         cout << "\t\t\t\t2. EXIT\n\n";
         cout << "ENTER YOUR CHOICE: ";
+        // Ask for input
         cin >> choice;
+        // If two go to the outro and exit the program
         if (choice == "2") {
+            // For animation purposes
             system("cls");
+            // Outro
             cout << "\t\t     THANK YOU FOR USING THIS SYSTEM\n";
             cout << "\n\n";
             cout << "\t______________________\n";
@@ -378,32 +468,45 @@ class Project {
             cin.ignore();
             cin.get();
         } else if (choice == "1") {
+            // Go to main menu
             main_menu();
         } else {
+            // If invalid input then restart
             intro();
         }
     }
 
    public:
+    // Make this function only public for security purposes
     void run() {
+        // Color Green
         system("color a");
+        // For animation purposes
         system("cls");
+        // Welcome Screen
         dashboard();
+        // Initialize variables
         string input;
         int limit = 5;
         cout << "Please Enter the password to access the system\n";
+        // While Loop
         while (limit--) {
             cout << "Password: ";
+            // Ask for input
             getline(cin, input);
             if (input == "1234") {
+                // If the input is equal to the correction password
+                // go to intro
                 intro();
                 break;
             } else {
                 if (limit == 0) {
+                    // If the user reached the limit, exit the program
                     cout << "Sorry, You've reached the limit!!!\n";
                     cout << "You can't access the system!!!\n";
                     break;
                 } else {
+                    // For user, to know there available chance/s left.
                     cout << "Wrong, You have " << limit << " chance/s left\n";
                 }
             }
@@ -412,7 +515,10 @@ class Project {
 };
 
 int main() {
+    // Initialize Class
     Project project;
+    // Run the project
     project.run();
+    // Exit the Program
     return 0;
 }
