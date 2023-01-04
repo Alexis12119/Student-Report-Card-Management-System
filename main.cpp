@@ -151,11 +151,29 @@ class Project {
                 "accept the datas\n";
         cout << "\tDon't worry, the system will ask you again, if it detects a "
                 "duplicate\n\n";
-        cout << "ENTER YOUR FULL NAME: ";
         cin.ignore();
-        cin.getline(s.name, 100);
-        cout << "ENTER YOUR STUDENT ID NUMBER: ";
-        cin.getline(s.id_number, 100);
+        // Run until the count of characters is <= 80
+        while (1) {
+            cout << "ENTER YOUR FULL NAME: ";
+            cin.getline(s.name, 100);
+            if (strlen(s.name) <= 80) {
+                break;
+            } else {
+                cout << "Don't exceed 80 characters\n";
+                cout << "Please, Try Again!!!\n";
+            }
+        }
+        // Run until the count of characters is <= 10
+        while (1) {
+            cout << "ENTER YOUR STUDENT ID NUMBER: ";
+            cin.getline(s.id_number, 100);
+            if (strlen(s.id_number) <= 10) {
+                break;
+            } else {
+                cout << "Don't exceed 10 characters\n";
+                cout << "Please, Try Again!!!\n";
+            }
+        }
         cout << "ENTER YOUR CC112 GRADE: ";
         cin >> s.cc112;
         cout << "ENTER YOUR GE101 GRADE: ";
@@ -177,7 +195,7 @@ class Project {
     // To shorten the code
     // Pass the struct
     void show_info(struct student &s) {
-        cout << "\t\t\t\tSTUDENT NAME: " << s.name.at(0) << "\n\n";
+        cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
         cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
         cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
         cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
@@ -495,6 +513,10 @@ class Project {
                 // go to intro
                 intro();
                 break;
+            } else if (input == "") {
+                // If no input print this
+                cout << "No input, Please try again!!!\n";
+                limit++;
             } else {
                 if (limit == 0) {
                     // If the user reached the limit, exit the program
