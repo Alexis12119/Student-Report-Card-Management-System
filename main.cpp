@@ -15,7 +15,7 @@ class Project {
     // To unify the student informations
     struct student {
         // name and id number
-        char name[1000], id_number[1000];
+        char name[100], id_number[100];
         // Subjects
         int ge101, fil101, ge102, cc112, pe1, lite, cc111, nstp1, sum, average;
     };
@@ -54,7 +54,7 @@ class Project {
         // Color white
         system("color 7");
         string choice;
-        char id[1000];
+        char id[100];
         // Print
         cout << "\t\t\t\t================= MAIN MENU ================\n\n\n";
         cout << "\t\t\t\t1. CREATE STUDENT REPORT CARD\n\n\n";
@@ -153,9 +153,9 @@ class Project {
                 "duplicate\n\n";
         cout << "ENTER YOUR FULL NAME(80 characters only): ";
         cin.ignore();
-        cin.getline(s.name, 1000);
+        cin.getline(s.name, 100);
         cout << "ENTER YOUR STUDENT ID NUMBER(10 characters only): ";
-        cin.getline(s.id_number, 1000);
+        cin.getline(s.id_number, 100);
         cout << "ENTER YOUR CC112 GRADE: ";
         cin >> s.cc112;
         cout << "ENTER YOUR GE101 GRADE: ";
@@ -177,7 +177,7 @@ class Project {
     // To shorten the code
     // Pass the struct
     void show_info(struct student &s) {
-        cout << "\t\t\t\tSTUDENT NAME: " << s.name << "\n\n";
+        cout << "\t\t\t\tSTUDENT NAME: " << s.name.at(0) << "\n\n";
         cout << "\t\t\t\tSTUDENT ID NUMBER: " << s.id_number << "\n\n";
         cout << "\t\t\t\tCC112 GRADE: " << s.cc112 << "\n\n";
         cout << "\t\t\t\tGE101 GRADE: " << s.ge101 << "\n\n";
