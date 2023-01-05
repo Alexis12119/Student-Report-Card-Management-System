@@ -3,15 +3,15 @@
    student.
 */
 
-// String library
+// String Header
 #include <string.h>
 // For windows operation
-// Window library
+// Window Header
 #include <windows.h>
 
 // For file handling
 #include <fstream>
-// Input and output
+// Input and Output
 #include <iostream>
 
 // To shorten code
@@ -142,8 +142,9 @@ class Project {
         }
     }
 
-    // A function to check if there's a duplicate
-    bool has_duplicate(char *id) {
+    // Use two separate function due to a bug
+    // A function to check if there's a duplicate id
+    bool has_duplicate_name(char *name) {
         // Don't check if the file is successfull opened
         // Since the operation is already done
         // When this functions is called
@@ -152,7 +153,29 @@ class Project {
         ifstream input_file;
         // Open the file
         input_file.open("Data.txt", ios::app | ios::binary);
-        // Search for same id number
+        // Search for same id number and name
+        while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
+            // If found return 1
+            if (strcmp(s.name, name) == 0) {
+                return 1;
+            }
+        }
+        // Close the file
+        input_file.close();
+        return 0;
+    }
+
+    // A function to check if there's a duplicate id
+    bool has_duplicate_id(char *id) {
+        // Don't check if the file is successfull opened
+        // Since the operation is already done
+        // When this functions is called
+        // Initialize variables
+        student s;
+        ifstream input_file;
+        // Open the file
+        input_file.open("Data.txt", ios::app | ios::binary);
+        // Search for same id number and name
         while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
             // If found return 1
             if (strcmp(s.id_number, id) == 0) {
@@ -164,58 +187,180 @@ class Project {
         return 0;
     }
 
+    bool has_only_space(string arr) {
+        for (auto &ch : arr) {
+            if (ch == ' ') {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    bool has_digit(string arr) {
+        for (auto &ch : arr) {
+            // Check if it's number using isdigit() function
+            if (isdigit(ch) == 1) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    bool has_alphabet(string arr) {
+        for (auto &ch : arr) {
+            // Check if it's alphabet using ascii
+            if ((ch >= 65 && ch <= 90) || (ch >= 97 && ch <= 122)) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
     // To shorten the code
     // Passing struct in the function
     void ask_input(struct student &s) {
         // Print
-        cout << "\tNOTE: When duplicate id number detected or no id number, the system won't "
+        cout << "\tNOTE: When duplicate of name or id number detected or doesn't have any input, \n"
+                "\tthe system won't "
                 "accept the datas\n";
-        cout << "\tDon't worry, the system will ask you again, if it detects a "
-                "duplicate\n\n";
-        // To fix some minor issue
+        cout << "\tDon't worry, the system will ask you again\n\n";
+        // To fix some minor issue on input
         cin.ignore();
+
         // Run until meet the certain requirement
         while (1) {
             cout << "ENTER YOUR FULL NAME: ";
             // Ask for input
             cin.getline(s.name, 100);
             // Check if the no. of characters is <= 80
-            if (strlen(s.name) <= 80) {
-                break;
+            // Check if you don't have any input or only contains space
+            // Check if there's a duplicate
+            // Check if there's a number
+            if ((string(s.name) == "") || (has_only_space(string(s.name)) == 1)) {
+                cout << "\nYou don't have any input!!!\n\n";
+            } else if (has_digit(string(s.name)) == 1) {
+                cout << "\nIt should not contain any numbers!!!\n\n";
+            } else if (strlen(s.name) > 80) {
+                cout << "\nYou've exceeded 80 characters!!!\n\n";
+            } else if (has_duplicate_name(s.name) == 1) {
+                cout << "\nIt's already in use!!!\n\n";
             } else {
-                cout << "Don't exceed 80 characters\n";
-                cout << "Please, Try Again!!!\n";
+                cout << "\nDone!!!\n\n";
+                break;
             }
         }
+
         // Run until meet the certain requirement
         while (1) {
             cout << "ENTER YOUR STUDENT ID NUMBER(PLSP): ";
             // Ask for input
             cin.getline(s.id_number, 100);
             // Check if the no. of characters is <= 10
-            if (strlen(s.id_number) <= 10) {
-                break;
+            // Check if you don't have any input or it only contains space
+            // Check if there's a duplicate
+            // Check if there's a letter
+            if ((string(s.id_number) == "") || (has_only_space(string(s.id_number)) == 1)) {
+                cout << "\nYou don't have any input!!!\n\n";
+            } else if (has_alphabet(string(s.id_number)) == 1) {
+                cout << "\nIt should not contain any letters!!!\n\n";
+            } else if (strlen(s.id_number) > 10) {
+                cout << "\nYou've exceeded 10 characters!!!\n\n";
+            } else if (has_duplicate_id(s.id_number) == 1) {
+                cout << "\nIt's already in use!!!\n\n";
             } else {
-                cout << "Don't exceed 10 characters\n";
-                cout << "Please, Try Again!!!\n";
+                cout << "\nDone!!!\n\n";
+                break;
             }
         }
-        cout << "ENTER YOUR CC112 GRADE: ";
-        cin >> s.cc112;
-        cout << "ENTER YOUR GE101 GRADE: ";
-        cin >> s.ge101;
-        cout << "ENTER YOUR FIL101 GRADE: ";
-        cin >> s.fil101;
-        cout << "ENTER YOUR GE102 GRADE: ";
-        cin >> s.ge102;
-        cout << "ENTER YOUR PE1 GRADE: ";
-        cin >> s.pe1;
-        cout << "ENTER YOUR LITE GRADE: ";
-        cin >> s.lite;
-        cout << "ENTER YOUR CC111 GRADE: ";
-        cin >> s.cc111;
-        cout << "ENTER YOUR NSTP1 GRADE: ";
-        cin >> s.nstp1;
+
+        // Run until meet the certain requirement
+        while (1) {
+            cout << "ENTER YOUR CC112 GRADE: ";
+            cin >> s.cc112;
+            if (s.cc112 >= 50 && s.cc112 <= 100) {
+                break;
+            } else {
+                cout << "\nInvalid Grade\nPlease, Try Again!!!\n\n";
+            }
+        }
+
+        // Run until meet the certain requirement
+        while (1) {
+            cout << "ENTER YOUR GE101 GRADE: ";
+            cin >> s.ge101;
+            if (s.ge101 >= 50 && s.ge101 <= 100) {
+                break;
+            } else {
+                cout << "\nInvalid Grade\nPlease, Try Again!!!\n\n";
+            }
+        }
+
+        // Run until meet the certain requirement
+        while (1) {
+            cout << "ENTER YOUR FIL101 GRADE: ";
+            cin >> s.fil101;
+            if (s.fil101 >= 50 && s.fil101 <= 100) {
+                break;
+            } else {
+                cout << "\nInvalid Grade\nPlease, Try Again!!!\n\n";
+            }
+        }
+
+        // Run until meet the certain requirement
+        while (1) {
+            cout << "ENTER YOUR GE102 GRADE: ";
+            cin >> s.ge102;
+            if (s.ge102 >= 50 && s.ge102 <= 100) {
+                break;
+            } else {
+                cout << "\nInvalid Grade\nPlease, Try Again!!!\n\n";
+            }
+        }
+
+        // Run until meet the certain requirement
+        while (1) {
+            cout << "ENTER YOUR PE1 GRADE: ";
+            cin >> s.pe1;
+            if (s.pe1 >= 50 && s.pe1 <= 100) {
+                break;
+            } else {
+                cout << "\nInvalid Grade\nPlease, Try Again!!!\n\n";
+            }
+        }
+
+        // Run until meet the certain requirement
+        while (1) {
+            cout << "ENTER YOUR LITE GRADE: ";
+            cin >> s.lite;
+            if (s.lite >= 50 && s.lite <= 100) {
+                break;
+            } else {
+                cout << "\nInvalid Grade\nPlease, Try Again!!!\n\n";
+            }
+        }
+
+        // Run until meet the certain requirement
+        while (1) {
+            cout << "ENTER YOUR CC111 GRADE: ";
+            cin >> s.cc111;
+            if (s.cc111 >= 50 && s.cc111 <= 100) {
+                break;
+            } else {
+                cout << "\nInvalid Grade\nPlease, Try Again!!!\n\n";
+            }
+        }
+
+        // Run until meet the certain requirement
+        while (1) {
+            cout << "ENTER YOUR NSTP1 GRADE: ";
+            cin >> s.nstp1;
+            if (s.nstp1 >= 50 && s.nstp1 <= 100) {
+                break;
+            } else {
+                cout << "\nInvalid Grade\nPlease, Try Again!!!\n\n";
+            }
+        }
+
         // Sum of grades
         s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101 + s.nstp1;
         // Average of grades
@@ -255,16 +400,9 @@ class Project {
             cout << "\t\t\t\t======= CREATE A REPORT CARD ========\n\n";
             ask_input(s);
 
-            // Check if there's a duplicate
-            if (has_duplicate(s.id_number) == 0) {
-                // If no duplicate then add the informations
-                output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
-                cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
-                cout << "Press Enter to continue...";
-            } else {
-                // If yes then restart
-                add_record();
-            }
+            output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
+            cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
+            cout << "Press Enter to continue...";
             // Close the file
             output_file.close();
         }
@@ -334,7 +472,8 @@ class Project {
                 if (strcmp(s.id_number, id) == 0) {
                     cout << "\t\t\t\t================================================\n";
                     show_info(s);
-                    cout << "=================================================================="
+                    cout << "==============================================================="
+                            "==="
                             "================\n";
 
                     equality = true;
@@ -387,16 +526,11 @@ class Project {
                         cout << "=============================================\n";
                         ask_input(s);
 
-                        // Check for duplicate of id number
-                        if (has_duplicate(s.id_number) == 0) {
-                            int pos = (-1) * static_cast<int>(sizeof(student));
-                            input_file.seekp(pos, ios::cur);
-                            input_file.write(reinterpret_cast<char *>(&s), sizeof(student));
-                            cout << "\n\t\t\t\tSUCCESSFULLY UPDATED!!!\n";
-                            cout << "\nPress Enter to continue...";
-                        } else {
-                            modify_record(s.id_number);
-                        }
+                        int pos = (-1) * static_cast<int>(sizeof(student));
+                        input_file.seekp(pos, ios::cur);
+                        input_file.write(reinterpret_cast<char *>(&s), sizeof(student));
+                        cout << "\n\t\t\t\tSUCCESSFULLY UPDATED!!!\n";
+                        cout << "\nPress Enter to continue...";
                         checker = true;
                     }
                 }
@@ -509,33 +643,33 @@ class Project {
             cout << "\t___________________________________________________\n";
             cout << "\t|                       GROUP 3                   |\n";
             cout << "\t___________________________________________________\n";
-            cout << "\t|   NAME                     |       SECTION      |\n";
+            cout << "\t|   NAME                  |    GRADE & SECTION    |\n";
             cout << "\t===================================================\n";
-            cout << "\t| Arguil, Devyth             |        BSIT-1E     |\n";
+            cout << "\t| Arguil, Devyth          |        BSIT-1E        |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Ballarda, Audrey Rose      |        BSIT-1E     |\n";
+            cout << "\t| Ballarda, Audrey Rose   |       BSIT-1E         |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Caceres, Jan Darsey        |        BSIT-1E     |\n";
+            cout << "\t| Caceres, Jan Darsey     |        BSIT-1E        |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Corporal, Alexis           |        BSIT-1E     |\n";
+            cout << "\t| Corporal, Alexis        |        BSIT-1E        |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Ducut, Rodelene            |        BSIT-1E     |\n";
+            cout << "\t| Ducut, Rodelene         |        BSIT-1E        |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Lacdan, Peejay             |        BSIT-1E     |\n";
+            cout << "\t| Lacdan, Peejay          |        BSIT-1E        |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Mendoza, Ronnel            |        BSIT-1E     |\n";
+            cout << "\t| Mendoza, Ronnel         |        BSIT-1E        |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Paliza, Janmar             |        BSIT-1E     |\n";
+            cout << "\t| Paliza, Janmar          |        BSIT-1E        |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| San Luis, James Errol      |        BSIT-1E     |\n";
+            cout << "\t| San Luis, James Errol   |        BSIT-1E        |\n";
             Sleep(300);
             cout << "\t===================================================\n";
             cout << "\n\nPress Enter to exit...";
@@ -565,6 +699,7 @@ class Project {
         string input;
         int limit = 5;
         cout << "Please Enter the password to access the system\n";
+        cout << "HINT: It's a basic number password that everyone knows.\n";
         // While Loop
         while (limit--) {
             cout << "Password: ";
@@ -575,7 +710,7 @@ class Project {
                 // go to intro
                 intro();
                 break;
-            } else if (input == "") {
+            } else if (input == "" || has_only_space(input) == 1) {
                 // If no input print this
                 cout << "No input, Please try again!!!\n";
                 limit++;
