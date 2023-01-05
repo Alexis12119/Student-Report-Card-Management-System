@@ -1,6 +1,12 @@
+/*
+   We've chose and created this system because we think that this will be beneficial for us as
+   student.
+*/
+
 // String library
 #include <string.h>
 // For windows operation
+// Window library
 #include <windows.h>
 
 // For file handling
@@ -8,8 +14,11 @@
 // Input and output
 #include <iostream>
 
+// To shorten code
+// Don't use this, if you want the code to be faster
 using namespace std;
 
+// Create a class
 class Project {
     // Declare a struct
     // To unify the student informations
@@ -24,35 +33,36 @@ class Project {
     void dashboard() {
         // Add spaces
         cout << "\n\n\n";
-        // For animation
+        // For animation purposes
         Sleep(300);
         cout << "\t\t\t_  _  _ _______        _______  _____  _______ _______\n";
-        // For animation
+        // For animation purposes
         Sleep(300);
         cout << "\t\t\t|  |  | |______ |      |       |     | |  |  | |______\n";
-        // For animation
+        // For animation purposes
         Sleep(300);
         cout << "\t\t\t|__|__| |______ |_____ |_____  |_____| |  |  | |______\n";
-        // For animation
+        // For animation purposes
         Sleep(300);
 
         cout << "\n\t\t\t=======================================================\n";
-        // For animation
+        // For animation purposes
         Sleep(500);
         cout << "\t\t\t\tSTUDENT REPORT CARD MANEGEMENT SYSTEM\n";
         cout << "\t\t\t\t\t      BY GROUP 3\n";
-        // For animation
+        // For animation purposes
         Sleep(500);
         cout << "\t\t\t=======================================================\n\n\n";
-        // For animation
+        // For animation purposes
         Sleep(500);
     }
 
     void main_menu() {
         // For animation purposes
         system("cls");
-        // Color white
+        // Color White
         system("color 7");
+        // Initialize variables
         string choice;
         char id[100];
         // Print
@@ -62,9 +72,10 @@ class Project {
         cout << "\t\t\t\t3. VIEW A SINGLE STUDENT REPORT CARD\n\n\n";
         cout << "\t\t\t\t4. MODIFY REPORT CARD\n\n\n";
         cout << "\t\t\t\t5. DELETE RECORD\n\n\n";
-        cout << "\t\t\t\t6. BACK\n\n\n";
+        cout << "\t\t\t\t6. DELETE ALL RECORD\n\n\n";
+        cout << "\t\t\t\t7. BACK\n\n\n";
         cout << "\t\t\t\t=============================================\n";
-        cout << "\t\t\t\tENTER YOUR CHOICE(1-6): ";
+        cout << "\t\t\t\tENTER YOUR CHOICE(1-7): ";
         // Ask user for input
         cin >> choice;
         cout << '\n';
@@ -113,6 +124,14 @@ class Project {
             main_menu();
 
         } else if (choice == "6") {
+            // For animation purposes
+            system("cls");
+            // Delete all report cards
+            delete_all_records();
+            // Back to main menu when the function is finished
+            main_menu();
+
+        } else if (choice == "7") {
             // Back to intro screen
             intro();
 
@@ -123,7 +142,7 @@ class Project {
         }
     }
 
-    // Check for duplicate
+    // A function to check if there's a duplicate
     bool has_duplicate(char *id) {
         // Don't check if the file is successfull opened
         // Since the operation is already done
@@ -135,6 +154,7 @@ class Project {
         input_file.open("Data.txt", ios::app | ios::binary);
         // Search for same id number
         while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
+            // If found return 1
             if (strcmp(s.id_number, id) == 0) {
                 return 1;
             }
@@ -147,11 +167,14 @@ class Project {
     // To shorten the code
     // Passing struct in the function
     void ask_input(struct student &s) {
+        // Print
         cout << "\tNOTE: When duplicate id number detected or no id number, the system won't "
                 "accept the datas\n";
         cout << "\tDon't worry, the system will ask you again, if it detects a "
                 "duplicate\n\n";
+        // To fix some minor issue
         cin.ignore();
+        // Run until meet the certain requirement
         while (1) {
             cout << "ENTER YOUR FULL NAME: ";
             // Ask for input
@@ -164,6 +187,7 @@ class Project {
                 cout << "Please, Try Again!!!\n";
             }
         }
+        // Run until meet the certain requirement
         while (1) {
             cout << "ENTER YOUR STUDENT ID NUMBER(PLSP): ";
             // Ask for input
@@ -192,6 +216,10 @@ class Project {
         cin >> s.cc111;
         cout << "ENTER YOUR NSTP1 GRADE: ";
         cin >> s.nstp1;
+        // Sum of grades
+        s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101 + s.nstp1;
+        // Average of grades
+        s.average = (s.sum / 8);
     }
 
     // To shorten the code
@@ -226,8 +254,7 @@ class Project {
             cout << "\n\n";
             cout << "\t\t\t\t======= CREATE A REPORT CARD ========\n\n";
             ask_input(s);
-            s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101 + s.nstp1;
-            s.average = (s.sum / 8);
+
             // Check if there's a duplicate
             if (has_duplicate(s.id_number) == 0) {
                 // If no duplicate then add the informations
@@ -241,7 +268,9 @@ class Project {
             // Close the file
             output_file.close();
         }
+        // To ignore the entered character
         cin.ignore();
+        // For animation purposes
         cin.get();
     }
 
@@ -278,7 +307,9 @@ class Project {
                 cout << "\t\t\t\tNO RECORD FOUND :(\n\n";
             cout << "Press Enter to continue....";
         }
+        // To ignore the entered character
         cin.ignore();
+        // For animation purposes
         cin.get();
     }
 
@@ -316,7 +347,10 @@ class Project {
                 cout << "\t\t\t\tRECORD NOT FOUND :(\n\n";
             cout << "Press Enter to continue...";
         }
+
+        // To ignore the entered character
         cin.ignore();
+        // For animation purposes
         cin.get();
     }
 
@@ -332,7 +366,10 @@ class Project {
         // If failed then don't run
         if (input_file.fail()) {
             cout << "THE FILE COULD NOT BE OPENED...\n";
+
+            // To ignore the entered character
             cin.ignore();
+            // For animation purposes
             cin.get();
         } else {
             cout << "\t\t\t\t========== MODIFY A REPORT CARD ==========\n\n";
@@ -350,9 +387,6 @@ class Project {
                         cout << "=============================================\n";
                         ask_input(s);
 
-                        s.sum = s.cc112 + s.pe1 + s.lite + s.cc111 + s.ge102 + s.fil101 + s.ge101
-                                + s.nstp1;
-                        s.average = (s.sum / 8);
                         // Check for duplicate of id number
                         if (has_duplicate(s.id_number) == 0) {
                             int pos = (-1) * static_cast<int>(sizeof(student));
@@ -373,7 +407,9 @@ class Project {
             }
             // Close the file
             input_file.close();
+            // To ignore the entered character
             cin.ignore();
+            // For animation purposes
             cin.get();
         }
     }
@@ -391,7 +427,9 @@ class Project {
         // If failed then don't run
         if (!input_file) {
             cout << "THE FILE COULD NOT BE OPENED...\n";
+            // To ignore the entered character
             cin.ignore();
+            // For animation purposes
             cin.get();
         } else {
             // Check if there's any record
@@ -423,9 +461,27 @@ class Project {
                 cout << "\t\t\t\tNO RECORD FOUND :(\n\n";
             }
             cout << "Press Enter to continue...";
+
+            // To ignore the entered character
             cin.ignore();
+            // For animation purposes
             cin.get();
         }
+    }
+
+    void delete_all_records() {
+        // For animation purposes
+        system("cls");
+        cout << "\t\t\t\t=========== DELETE ALL REPORT CARDS ==========\n\n";
+        // Delete the file where the informations are stored
+        remove("Data.txt");
+        cout << "\n\t\t\t\tSUCCESSFULLY DELETED!!!\n";
+        cout << "Press Enter to continue...";
+
+        // To ignore the entered character
+        cin.ignore();
+        // For animation purposes
+        cin.get();
     }
 
     void intro() {
@@ -450,38 +506,42 @@ class Project {
             // Outro
             cout << "\t\t     THANK YOU FOR USING THIS SYSTEM\n";
             cout << "\n\n";
-            cout << "\t______________________\n";
-            cout << "\t|   MEMBERS          |\n";
+            cout << "\t___________________________________________________\n";
+            cout << "\t|                       GROUP 3                   |\n";
+            cout << "\t___________________________________________________\n";
+            cout << "\t|   NAME                     |       SECTION      |\n";
             cout << "\t===================================================\n";
-            cout << "\t| Arguil, Devyth               |        BSIT-1E   |\n";
+            cout << "\t| Arguil, Devyth             |        BSIT-1E     |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Ballarda, Audrey Rose        |        BSIT-1E   |\n";
+            cout << "\t| Ballarda, Audrey Rose      |        BSIT-1E     |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Caceres, Jan Darsey          |        BSIT-1E   |\n";
+            cout << "\t| Caceres, Jan Darsey        |        BSIT-1E     |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Corporal, Alexis             |        BSIT-1E   |\n";
+            cout << "\t| Corporal, Alexis           |        BSIT-1E     |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Ducut, Rodelene              |        BSIT-1E   |\n";
+            cout << "\t| Ducut, Rodelene            |        BSIT-1E     |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Lacdan, Peejay               |        BSIT-1E   |\n";
+            cout << "\t| Lacdan, Peejay             |        BSIT-1E     |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Mendoza, Ronnel              |        BSIT-1E   |\n";
+            cout << "\t| Mendoza, Ronnel            |        BSIT-1E     |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Paliza, Janmar               |        BSIT-1E   |\n";
+            cout << "\t| Paliza, Janmar             |        BSIT-1E     |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| San Luis, James Errol        |        BSIT-1E   |\n";
+            cout << "\t| San Luis, James Errol      |        BSIT-1E     |\n";
             Sleep(300);
             cout << "\t===================================================\n";
             cout << "\n\nPress Enter to exit...";
+            // To ignore the entered character
             cin.ignore();
+            // For animation purposes
             cin.get();
         } else if (choice == "1") {
             // Go to main menu

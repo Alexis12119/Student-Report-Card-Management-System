@@ -8,3 +8,4 @@ Final Project for 1st semester
 * View all records of report card
 * View specific record of report card
 * Delete a specific report card
+* Delete all report cards
