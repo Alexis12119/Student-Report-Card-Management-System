@@ -574,6 +574,7 @@ class Project {
         }
         cout << "Press Enter to continue...";
 
+        input_file.close();
         // To ignore the entered character
         cin.ignore();
         // For animation purposes
