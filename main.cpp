@@ -188,10 +188,14 @@ class Project {
     }
 
     bool has_only_space(string arr) {
+        int count = 0;
         for (auto &ch : arr) {
             if (ch == ' ') {
-                return 1;
+                count++;
             }
+        }
+        if (count == arr.length()) {
+            return 1;
         }
         return 0;
     }
