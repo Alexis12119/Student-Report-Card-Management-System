@@ -72,7 +72,7 @@ class Project {
         cout << "\t\t\t\t3. VIEW A SINGLE STUDENT REPORT CARD\n\n\n";
         cout << "\t\t\t\t4. MODIFY REPORT CARD\n\n\n";
         cout << "\t\t\t\t5. DELETE RECORD\n\n\n";
-        cout << "\t\t\t\t6. DELETE ALL RECORD\n\n\n";
+        cout << "\t\t\t\t6. DELETE ALL RECORDS\n\n\n";
         cout << "\t\t\t\t7. BACK\n\n\n";
         cout << "\t\t\t\t=============================================\n";
         cout << "\t\t\t\tENTER YOUR CHOICE(1-7): ";
