@@ -1,8 +1,3 @@
-/*
-   We've chose and created this system because we think that this will be beneficial for us as
-   student.
-*/
-
 // String Header
 #include <string.h>
 // For windows operation
