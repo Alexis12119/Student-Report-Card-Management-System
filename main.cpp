@@ -555,7 +555,7 @@ class Project {
         // Open the file
         input_file.open("Data.txt", ios::binary);
         // If failed then don't run
-        if (!input_file) {
+        if (input_file.fail()) {
             cerr << "THE FILE COULD NOT BE OPENED...\n";
         } else {
             output_file.open("Backup.txt", ios::binary);
