@@ -550,7 +550,6 @@ class Project {
         system("cls");
         // Initialize variables
         student s;
-        bool check = 0;
         ifstream input_file;
         ofstream output_file;
         // Open the file
@@ -559,34 +558,19 @@ class Project {
         if (!input_file) {
             cerr << "THE FILE COULD NOT BE OPENED...\n";
         } else {
-            // Check if there's any record
-            while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-                if (strcmp(s.id_number, id) == 0) {
-                    check = 1;
-                    break;
-                }
-            }
+            output_file.open("Backup.txt", ios::binary);
             cout << "\t\t\t\t=========== DELETE A REPORT CARD ==========\n\n";
-            // If yes, then delete that specific report card
-            if (check) {
-                while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
-                    if (strcmp(s.id_number, id) != 0) {
-                        output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
-                    }
+            while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
+                if (strcmp(s.id_number, id) != 0) {
+                    output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
                 }
-                output_file.open("Backup.txt", ios::binary);
-                input_file.seekg(0, ios::beg);
-                input_file.close();
-                output_file.close();
-                remove("Data.txt");
-                rename("Backup.txt", "Data.txt");
-                cout << "\n\t\t\t\tSUCCESSFULLY DELETED!!!\n";
-            } else {
-                // Close the files
-                input_file.close();
-                output_file.close();
-                cout << "\t\t\t\tNO RECORD FOUND :(\n\n";
             }
+            input_file.seekg(0, ios::beg);
+            input_file.close();
+            output_file.close();
+            remove("Data.txt");
+            rename("Backup.txt", "Data.txt");
+            cout << "\n\t\t\t\tSUCCESSFULLY DELETED!!!\n";
         }
         cout << "Press Enter to continue...";
 
