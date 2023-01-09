@@ -6,7 +6,7 @@
 // String Header
 #include <string.h>
 // For windows operation
-// Window Header
+// Windows Header
 #include <windows.h>
 
 // For File Handling
