@@ -240,13 +240,13 @@ class Project {
             // Check if you don't have any input or only contains space
             // Check if there's a duplicate
             // Check if there's a number
-            if (has_only_space(string(s.name)) == 1) {
+            if (has_only_space(string(s.name))) {
                 cerr << "\nYou don't have any input!!!\n\n";
-            } else if (has_digit(string(s.name)) == 1) {
+            } else if (has_digit(string(s.name))) {
                 cerr << "\nIt should not contain any numbers!!!\n\n";
             } else if (strlen(s.name) > 80) {
                 cerr << "\nYou've exceeded 80 characters!!!\n\n";
-            } else if (has_duplicate_name(s.name) == 1) {
+            } else if (has_duplicate_name(s.name)) {
                 cerr << "\nIt's already in use!!!\n\n";
             } else {
                 cout << "\nDone!!!\n\n";
@@ -263,13 +263,13 @@ class Project {
             // Check if you don't have any input or it only contains space
             // Check if there's a duplicate
             // Check if there's a letter
-            if (has_only_space(string(s.id_number)) == 1) {
+            if (has_only_space(string(s.id_number))) {
                 cerr << "\nYou don't have any input!!!\n\n";
-            } else if (has_alphabet(string(s.id_number)) == 1) {
+            } else if (has_alphabet(string(s.id_number))) {
                 cerr << "\nIt should not contain any letters!!!\n\n";
             } else if (strlen(s.id_number) > 10) {
                 cerr << "\nYou've exceeded 10 characters!!!\n\n";
-            } else if (has_duplicate_id(s.id_number) == 1) {
+            } else if (has_duplicate_id(s.id_number)) {
                 cerr << "\nIt's already in use!!!\n\n";
             } else {
                 cout << "\nDone!!!\n\n";
@@ -565,12 +565,18 @@ class Project {
                     output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
                 }
             }
-            input_file.seekg(0, ios::beg);
-            input_file.close();
-            output_file.close();
-            remove("Data.txt");
-            rename("Backup.txt", "Data.txt");
-            cout << "\n\t\t\t\tSUCCESSFULLY DELETED!!!\n";
+            if (has_duplicate_id(id)) {
+                input_file.seekg(0, ios::beg);
+                input_file.close();
+                output_file.close();
+                remove("Data.txt");
+                rename("Backup.txt", "Data.txt");
+                cout << "\n\t\t\t\tSUCCESSFULLY DELETED!!!\n";
+            } else {
+                input_file.close();
+                output_file.close();
+                cout << "\n\t\t\t\tNO RECORD FOUND!!!\n";
+            }
         }
         cout << "Press Enter to continue...";
 
