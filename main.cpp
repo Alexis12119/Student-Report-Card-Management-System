@@ -712,7 +712,7 @@ class Project {
                 break;
             } else if (input == "" || has_only_space(input) == 1) {
                 // If no input print this
-                cout << "No input, Please try again!!!\n";
+                cerr << "No input, Please try again!!!\n";
                 limit++;
             } else {
                 if (limit == 0) {
@@ -722,7 +722,7 @@ class Project {
                     break;
                 } else {
                     // For user, to know there available chance/s left.
-                    cout << "Wrong, You have " << limit << " chance/s left\n";
+                    cerr << "Wrong, You have " << limit << " chance/s left\n";
                 }
             }
         }
