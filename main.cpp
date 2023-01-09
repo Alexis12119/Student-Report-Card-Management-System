@@ -240,7 +240,7 @@ class Project {
             // Check if you don't have any input or only contains space
             // Check if there's a duplicate
             // Check if there's a number
-            if ((string(s.name) == "") || (has_only_space(string(s.name)) == 1)) {
+            if (has_only_space(string(s.name)) == 1) {
                 cerr << "\nYou don't have any input!!!\n\n";
             } else if (has_digit(string(s.name)) == 1) {
                 cerr << "\nIt should not contain any numbers!!!\n\n";
@@ -263,7 +263,7 @@ class Project {
             // Check if you don't have any input or it only contains space
             // Check if there's a duplicate
             // Check if there's a letter
-            if ((string(s.id_number) == "") || (has_only_space(string(s.id_number)) == 1)) {
+            if (has_only_space(string(s.id_number)) == 1) {
                 cerr << "\nYou don't have any input!!!\n\n";
             } else if (has_alphabet(string(s.id_number)) == 1) {
                 cerr << "\nIt should not contain any letters!!!\n\n";
@@ -398,7 +398,7 @@ class Project {
         output_file.open("Data.txt", ios::app | ios::binary);
         // If failed then don't run
         if (output_file.fail()) {
-            cerr << "THE FILE COULD NOT BE OPEN...Press Enter";
+            cerr << "THE FILE COULD NOT BE OPEN...";
         } else {
             cout << "\n\n";
             cout << "\t\t\t\t======= CREATE A REPORT CARD ========\n\n";
@@ -406,10 +406,11 @@ class Project {
 
             output_file.write(reinterpret_cast<char *>(&s), sizeof(student));
             cout << "\n\t\t\t\tSUCCESSFULLY CREATED!!!\n\n";
-            cout << "Press Enter to continue...";
             // Close the file
             output_file.close();
         }
+
+        cout << "Press Enter to continue...";
         // To ignore the entered character
         cin.ignore();
         // For animation purposes
@@ -427,9 +428,7 @@ class Project {
         input_file.open("Data.txt", ios::app | ios::binary);
         // If failed then don't run
         if (input_file.fail()) {
-            cerr << "THE FILE COULD NOT BE OPENED.....Press Enter...";
-            cin.ignore();
-            cin.get();
+            cerr << "THE FILE COULD NOT BE OPENED...";
         } else {
             cout << "\n\n\t\t\t\tALL STUDENTS REPORT CARDS\n";
             cout << "===================================================================="
@@ -447,8 +446,8 @@ class Project {
             // Check if there's any informations
             if (check == false)
                 cout << "\t\t\t\tNO RECORD FOUND :(\n\n";
-            cout << "Press Enter to continue....";
         }
+        cout << "Press Enter to continue....";
         // To ignore the entered character
         cin.ignore();
         // For animation purposes
@@ -467,8 +466,6 @@ class Project {
         // If failed then don't run
         if (input_file.fail()) {
             cerr << "THE FILE COULD NOT BE OPENED...";
-            cin.ignore();
-            cin.get();
         } else {
             cout << "\t\t\t\t========== VIEW A SINGLE STUDENT REPORT ==========\n\n";
             // Search for the specific report card
@@ -488,9 +485,9 @@ class Project {
             // Check if there's any informations
             if (equality == false)
                 cout << "\t\t\t\tRECORD NOT FOUND :(\n\n";
-            cout << "Press Enter to continue...";
         }
 
+        cout << "Press Enter to continue...";
         // To ignore the entered character
         cin.ignore();
         // For animation purposes
@@ -509,11 +506,6 @@ class Project {
         // If failed then don't run
         if (input_file.fail()) {
             cerr << "THE FILE COULD NOT BE OPENED...\n";
-
-            // To ignore the entered character
-            cin.ignore();
-            // For animation purposes
-            cin.get();
         } else {
             cout << "\t\t\t\t========== MODIFY A REPORT CARD ==========\n\n";
             // Check until the last part of the file
@@ -534,22 +526,23 @@ class Project {
                         input_file.seekp(pos, ios::cur);
                         input_file.write(reinterpret_cast<char *>(&s), sizeof(student));
                         cout << "\n\t\t\t\tSUCCESSFULLY UPDATED!!!\n";
-                        cout << "\nPress Enter to continue...";
                         checker = true;
                     }
                 }
-                if (checker == false) {
-                    cout << "\t\t\t\tRECORD NOT FOUND :(\n";
-                    cout << "\nPress Enter to continue...";
-                }
             }
-            // Close the file
-            input_file.close();
-            // To ignore the entered character
-            cin.ignore();
-            // For animation purposes
-            cin.get();
+
+            if (checker == false) {
+                cout << "\t\t\t\tRECORD NOT FOUND :(\n";
+            }
         }
+
+        // Close the file
+        input_file.close();
+        cout << "\nPress Enter to continue...";
+        // To ignore the entered character
+        cin.ignore();
+        // For animation purposes
+        cin.get();
     }
 
     void delete_record(char *id) {
@@ -565,10 +558,6 @@ class Project {
         // If failed then don't run
         if (!input_file) {
             cerr << "THE FILE COULD NOT BE OPENED...\n";
-            // To ignore the entered character
-            cin.ignore();
-            // For animation purposes
-            cin.get();
         } else {
             // Check if there's any record
             while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
@@ -598,13 +587,13 @@ class Project {
                 output_file.close();
                 cout << "\t\t\t\tNO RECORD FOUND :(\n\n";
             }
-            cout << "Press Enter to continue...";
-
-            // To ignore the entered character
-            cin.ignore();
-            // For animation purposes
-            cin.get();
         }
+        cout << "Press Enter to continue...";
+
+        // To ignore the entered character
+        cin.ignore();
+        // For animation purposes
+        cin.get();
     }
 
     void delete_all_records() {
@@ -614,8 +603,8 @@ class Project {
         // Delete the file where the informations are stored
         remove("Data.txt");
         cout << "\n\t\t\t\tSUCCESSFULLY DELETED!!!\n";
-        cout << "Press Enter to continue...";
 
+        cout << "Press Enter to continue...";
         // To ignore the entered character
         cin.ignore();
         // For animation purposes
@@ -714,7 +703,7 @@ class Project {
                 // go to intro
                 intro();
                 break;
-            } else if (input == "" || has_only_space(input) == 1) {
+            } else if (has_only_space(input) == 1) {
                 // If no input print this
                 cerr << "No input, Please try again!!!\n";
                 limit++;
