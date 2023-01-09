@@ -5,12 +5,11 @@
 
 // String Header
 #include <string.h>
+// For windows operation
+// Window Header
+#include <windows.h>
 
-// For animation purposes
-#include <chrono>
-#include <thread>
-
-// For file handling
+// For File Handling
 #include <fstream>
 // Input and Output
 #include <iostream>
@@ -35,34 +34,34 @@ class Project {
         // Add spaces
         cout << "\n\n\n";
         // For animation purposes
-        this_thread::sleep_for(chrono::milliseconds(300));
+        Sleep(300);
         cout << "\t\t\t_  _  _ _______        _______  _____  _______ _______\n";
         // For animation purposes
-        this_thread::sleep_for(chrono::milliseconds(300));
+        Sleep(300);
         cout << "\t\t\t|  |  | |______ |      |       |     | |  |  | |______\n";
         // For animation purposes
-        this_thread::sleep_for(chrono::milliseconds(300));
+        Sleep(300);
         cout << "\t\t\t|__|__| |______ |_____ |_____  |_____| |  |  | |______\n";
         // For animation purposes
-        this_thread::sleep_for(chrono::milliseconds(300));
+        Sleep(300);
 
         cout << "\n\t\t\t=======================================================\n";
         // For animation purposes
-        this_thread::sleep_for(chrono::milliseconds(500));
+        Sleep(500);
         cout << "\t\t\t\tSTUDENT REPORT CARD MANEGEMENT SYSTEM\n";
         cout << "\t\t\t\t\t      BY GROUP 3\n";
         // For animation purposes
-        this_thread::sleep_for(chrono::milliseconds(500));
+        Sleep(500);
         cout << "\t\t\t=======================================================\n\n\n";
         // For animation purposes
-        this_thread::sleep_for(chrono::milliseconds(500));
+        Sleep(500);
     }
 
     void main_menu() {
         // For animation purposes
-        cout << "\033[2J\033[1;1H";
+        system("cls");
         // Color White
-        cout << "\033[37m";
+        system("color 7");
         // Initialize variables
         string choice;
         char id[100];
@@ -95,7 +94,7 @@ class Project {
 
         } else if (choice == "3") {
             // For animation purposes
-            cout << "\033[2J\033[1;1H";
+            system("cls");
             cout << "ENTER YOUR STUDENT ID NUMBER: ";
             cin >> id;
             // View a specific report card
@@ -105,7 +104,7 @@ class Project {
 
         } else if (choice == "4") {
             // For animation purposes
-            cout << "\033[2J\033[1;1H";
+            system("cls");
             cout << "ENTER YOUR STUDENT ID NUMBER: ";
             cin >> id;
             // Modify a report card
@@ -116,7 +115,7 @@ class Project {
 
         } else if (choice == "5") {
             // For animation purposes
-            cout << "\033[2J\033[1;1H";
+            system("cls");
             cout << "ENTER YOUR STUDENT ID NUMBER: ";
             cin >> id;
             // Delete a specific report card
@@ -126,7 +125,7 @@ class Project {
 
         } else if (choice == "6") {
             // For animation purposes
-            cout << "\033[2J\033[1;1H";
+            system("cls");
             // Delete all report cards
             delete_all_records();
             // Back to main menu when the function is finished
@@ -137,7 +136,7 @@ class Project {
             intro();
 
         } else {
-            cout << "\033[2J\033[1;1H";
+            system("cls");
             // In case when the input is less than 1 or more than 6
             main_menu();
         }
@@ -387,7 +386,7 @@ class Project {
 
     void add_record() {
         // For animation purposes
-        cout << "\033[2J\033[1;1H";
+        system("cls");
         // Initialize variables
         student s;
         ofstream output_file;
@@ -415,7 +414,7 @@ class Project {
 
     void view_all_records() {
         // For animation purposes
-        cout << "\033[2J\033[1;1H";
+        system("cls");
         // Initialize variables
         student s;
         ifstream input_file;
@@ -454,7 +453,7 @@ class Project {
 
     void view_specific_record(char *id) {
         // For animation purposes
-        cout << "\033[2J\033[1;1H";
+        system("cls");
         // Initialize variables
         student s;
         ifstream input_file;
@@ -496,7 +495,7 @@ class Project {
 
     void modify_record(char *id) {
         // For animation purposes
-        cout << "\033[2J\033[1;1H";
+        system("cls");
         // Initialize variables
         student s;
         fstream input_file;
@@ -551,7 +550,7 @@ class Project {
 
     void delete_record(char *id) {
         // For animation purposes
-        cout << "\033[2J\033[1;1H";
+        system("cls");
         // Initialize variables
         student s;
         bool check = 0;
@@ -606,7 +605,7 @@ class Project {
 
     void delete_all_records() {
         // For animation purposes
-        cout << "\033[2J\033[1;1H";
+        system("cls");
         cout << "\t\t\t\t=========== DELETE ALL REPORT CARDS ==========\n\n";
         // Delete the file where the informations are stored
         remove("Data.txt");
@@ -623,9 +622,9 @@ class Project {
         // Initialize variables
         string choice;
         // For animation purposes
-        cout << "\033[2J\033[1;1H";
+        system("cls");
         // Color Yellow
-        cout << "\033[93m";
+        system("color e");
         // Print
         cout << "\n\n\t==================== STUDENT REPORT CARD MANEGEMENT "
                 "SYSTEM ====================\n\n";
@@ -637,7 +636,7 @@ class Project {
         // If two go to the outro and exit the program
         if (choice == "2") {
             // For animation purposes
-            cout << "\033[2J\033[1;1H";
+            system("cls");
             // Outro
             cout << "\t\t     THANK YOU FOR USING THIS SYSTEM\n";
             cout << "\n\n";
@@ -647,31 +646,31 @@ class Project {
             cout << "\t|   NAME                  |    GRADE & SECTION    |\n";
             cout << "\t===================================================\n";
             cout << "\t| Arguil, Devyth          |        BSIT-1E        |\n";
-            this_thread::sleep_for(chrono::milliseconds(300));
+            Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
             cout << "\t| Ballarda, Audrey Rose   |       BSIT-1E         |\n";
-            this_thread::sleep_for(chrono::milliseconds(300));
+            Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
             cout << "\t| Caceres, Jan Darsey     |        BSIT-1E        |\n";
-            this_thread::sleep_for(chrono::milliseconds(300));
+            Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
             cout << "\t| Corporal, Alexis        |        BSIT-1E        |\n";
-            this_thread::sleep_for(chrono::milliseconds(300));
+            Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
             cout << "\t| Ducut, Rodelene         |        BSIT-1E        |\n";
+            Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            this_thread::sleep_for(chrono::milliseconds(300));
             cout << "\t| Lacdan, Peejay          |        BSIT-1E        |\n";
-            this_thread::sleep_for(chrono::milliseconds(300));
+            Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
             cout << "\t| Mendoza, Ronnel         |        BSIT-1E        |\n";
-            this_thread::sleep_for(chrono::milliseconds(300));
+            Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
             cout << "\t| Paliza, Janmar          |        BSIT-1E        |\n";
-            this_thread::sleep_for(chrono::milliseconds(300));
+            Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
             cout << "\t| San Luis, James Errol   |        BSIT-1E        |\n";
-            this_thread::sleep_for(chrono::milliseconds(300));
+            Sleep(300);
             cout << "\t===================================================\n";
             cout << "\n\nPress Enter to exit...";
             // To ignore the entered character
@@ -691,9 +690,9 @@ class Project {
     // Make this function only public for security purposes
     void run() {
         // Color Green
-        cout << "\033[92m";
+        system("color a");
         // For animation purposes
-        cout << "\033[2J\033[1;1H";
+        system("cls");
         // Welcome Screen
         dashboard();
         // Initialize variables
