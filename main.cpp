@@ -627,7 +627,7 @@ class Project {
             cout << "\t| Arguil, Devyth          |        BSIT-1E        |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
-            cout << "\t| Ballarda, Audrey Rose   |       BSIT-1E         |\n";
+            cout << "\t| Ballarda, Audrey Rose   |        BSIT-1E        |\n";
             Sleep(300);
             cout << "\t|-------------------------------------------------|\n";
             cout << "\t| Caceres, Jan Darsey     |        BSIT-1E        |\n";
