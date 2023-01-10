@@ -151,7 +151,7 @@ class Project {
         // Search for same id number and name
         while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
             // If found return 1
-            if (strcmp(s.name, name) == 0) {
+            if (strcmp(strlwr(s.name), strlwr(name)) == 0) {
                 return 1;
             }
         }
@@ -173,7 +173,7 @@ class Project {
         // Search for same id number and name
         while (input_file.read(reinterpret_cast<char *>(&s), sizeof(student))) {
             // If found return 1
-            if (strcmp(s.id_number, id) == 0) {
+            if (strcmp(strlwr(s.id_number), strlwr(id)) == 0) {
                 return 1;
             }
         }
